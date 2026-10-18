@@ -1,0 +1,5512 @@
+/*
+ * style.css - वैदिक ज्योतिष तथा कुण्डली दर्शन शैली (Vedic Styling)
+ * Kundali Darsan Web
+ */
+
+@import url('https://fonts.googleapis.com/css2?family=Martel:wght@600;700;800;900&family=Mukta:wght@300;400;500;600;700;800&family=Noto+Sans+Devanagari:wght@400;500;600;700;800&family=Noto+Serif+Devanagari:wght@500;600;700;800;900&family=Tiro+Devanagari+Sanskrit:ital,wght@0,400;0,700;1,400&family=Cinzel:wght@600;700&display=swap');
+
+:root {
+    /* ====================================================
+       Typographic Hierarchy (फन्ट प्रणाली)
+       १. Noto Serif Devanagari / Martel: कुण्डली चक्र तथा परम्परागत ज्योतिष फन्ट
+       २. Noto Sans Devanagari: नेपाली शीर्षक, पृष्ठ शीर्षक, मेनु सामग्री
+       ३. Mukta: आधुनिक, सफा र मैत्रीपूर्ण लुकका लागि (Body, Form, Tables, Cards, UI)
+       ४. Tiro Devanagari Sanskrit: शास्त्रीय, संस्कृतप्रधान शीर्षक तथा मङ्गल श्लोकका लागि
+       ==================================================== */
+    --font-chart: 'Noto Serif Devanagari', 'Martel', 'Tiro Devanagari Sanskrit', serif;
+    --font-heading: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    --font-prose: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    --font-body: 'Mukta', 'Noto Sans Devanagari', -apple-system, sans-serif;
+    --font-sanskrit: 'Tiro Devanagari Sanskrit', 'Noto Sans Devanagari', serif;
+
+    --primary: #101A33;            /* Cosmic Navy / Deep Navy */
+    --primary-dark: #0B1224;       /* Deep Cosmic Navy */
+    --primary-light: #263653;      /* Slate Blue */
+    --gold: #C6A45C;               /* Antique Gold */
+    --gold-dark: #A6863E;          /* Darker Antique Gold */
+    --gold-light: #F2E8D3;         /* Light Antique Gold Tint */
+    --bg-creme: #F7F4EC;           /* Ivory - मुख्य Background */
+    --bg-card: #FFFFFF;            /* White - Card Background */
+    --text-dark: #303744;          /* Charcoal - सामान्य Text */
+    --text-heading: #101A33;       /* Deep Navy - मुख्य Heading */
+    --text-muted: #5A6474;         /* Charcoal Muted */
+    --border-color: #E6DFD0;       /* Soft Beige - Border / Divider */
+    --border-gold: #C6A45C;        /* Antique Gold */
+    --shadow: 0 4px 14px rgba(16, 26, 51, 0.06);
+    --radius: 10px;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    position: relative;
+    font-family: var(--font-body);
+    background-color: var(--bg-creme);
+    color: var(--text-dark);
+    line-height: 1.5;
+    padding-bottom: 40px;
+    min-height: 100vh;
+}
+
+/* ====================================================
+   वेवसाइट पृष्ठभूमि वाटरमार्क (Site-wide Background Watermark)
+   ==================================================== */
+.site-watermark-bg {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(85vw, 680px);
+    height: min(85vw, 680px);
+    background: url('../assets/watermark_bg.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.030;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    user-select: none;
+    z-index: 2;
+}
+
+#kundaliPatrikaCard {
+    position: relative;
+    z-index: 3;
+}
+
+/* १. नेपाली शीर्षक, पृष्ठ शीर्षक (Noto Sans Devanagari) */
+h1, h2, h3, h4, h5, h6,
+.card-header-title,
+.panchang-header-title,
+.panchang-title-text,
+.panchang-date-banner,
+.dasha-phal-title,
+.phaladesh-sec-title,
+.active-phal-heading,
+.dasha-all-section-title,
+.modal-header h3 {
+    font-family: var(--font-heading);
+    color: var(--text-heading);
+}
+
+/* मेनु तथा नेभिगेसन बार (Noto Sans Devanagari) */
+.nav-tab-btn,
+.dasha-sys-btn,
+.varga-pill,
+.phal-filter-btn,
+.btn-dasha-tool {
+    font-family: var(--font-heading);
+}
+
+/* ३. शास्त्रीय, संस्कृतप्रधान र परम्परागत शीर्षक तथा मङ्गल श्लोक (Tiro Devanagari Sanskrit) */
+.shloka,
+.shloka-namah,
+.shloka-main,
+.yogini-highlight-shloka,
+.yogini-shloka-quote,
+.shloka-source,
+.mansagari-shloka,
+.vedic-shloka {
+    font-family: var(--font-sanskrit);
+}
+
+/* Header */
+.app-header {
+    background: #101A33;
+    color: #FFFFFF;
+    padding: 20px 0 16px 0;
+    border-bottom: 3.5px solid var(--gold);
+    box-shadow: 0 4px 15px rgba(16, 26, 51, 0.2);
+    text-align: center;
+}
+
+.header-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+}
+
+.ganesh-logo {
+    width: 74px;
+    height: 74px;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 10px rgba(217, 119, 6, 0.55)) drop-shadow(0 3px 6px rgba(0,0,0,0.45));
+    transition: transform 0.25s ease;
+}
+
+.ganesh-logo:hover {
+    transform: scale(1.06);
+}
+
+.header-titles h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: 0.5px;
+    color: #FFFFFF;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
+}
+
+.shloka {
+    font-size: 0.95rem;
+    color: var(--gold);
+    font-style: italic;
+    margin-top: 4px;
+}
+
+.header-meta {
+    font-size: 0.85rem;
+    color: #E6DFD0;
+    margin-top: 2px;
+}
+
+/* Navigation Tabs (Navbar) */
+.nav-tabs-wrapper {
+    background: #101A33;
+    border-bottom: 2px solid var(--gold);
+    box-shadow: 0 2px 8px rgba(16, 26, 51, 0.15);
+}
+
+.nav-tabs {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    overflow-x: auto;
+    padding: 0 10px;
+}
+
+.nav-tab-btn {
+    padding: 13px 22px;
+    border: none;
+    background: transparent;
+    font-family: inherit;
+    font-size: 1.05rem;
+    font-weight: 600;
+    color: #E6DFD0;
+    cursor: pointer;
+    border-bottom: 3px solid transparent;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+}
+
+.nav-tab-btn:hover {
+    color: #FFFFFF;
+    background-color: #263653;
+}
+
+.nav-tab-btn.active {
+    color: #FFFFFF;
+    border-bottom-color: var(--gold);
+    background-color: #263653;
+    font-weight: 700;
+}
+
+/* Main Container */
+.container {
+    max-width: 1200px;
+    margin: 25px auto;
+    padding: 0 20px;
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+    animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(6px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Cards & Sections */
+.card {
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: var(--radius);
+    padding: 24px;
+    margin-bottom: 24px;
+    box-shadow: var(--shadow);
+}
+
+.card-title {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 18px;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+/* Form Styles */
+.form-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.form-group label {
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--text-dark);
+}
+
+.form-control {
+    padding: 10px 14px;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: inherit;
+    font-size: 1rem;
+    background-color: #FFFFFF;
+    color: var(--text-dark);
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: var(--gold);
+    box-shadow: 0 0 0 3px rgba(198, 164, 92, 0.2);
+}
+
+.date-triplet {
+    display: flex;
+    gap: 8px;
+}
+
+.date-triplet select {
+    flex: 1;
+}
+
+/* Buttons */
+.btn-primary {
+    background: #101A33;
+    color: #FFFFFF;
+    border: 1px solid var(--gold);
+    padding: 12px 28px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    font-family: inherit;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(16, 26, 51, 0.2);
+    transition: all 0.2s;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.btn-primary:hover {
+    background: #263653;
+    border-color: var(--gold);
+    transform: translateY(-1px);
+    box-shadow: 0 6px 14px rgba(38, 54, 83, 0.25);
+}
+
+.btn-gold {
+    background: var(--gold);
+    color: #101A33;
+    border: none;
+    padding: 10px 22px;
+    font-size: 1rem;
+    font-weight: 700;
+    font-family: inherit;
+    border-radius: 6px;
+    cursor: pointer;
+    box-shadow: 0 3px 8px rgba(198, 164, 92, 0.3);
+    transition: all 0.2s;
+}
+
+.btn-gold:hover {
+    background: #B5934A;
+    color: #0B1224;
+}
+
+/* Info Cards & Grid */
+.info-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+}
+
+.card-header-title {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--primary);
+    margin-bottom: 12px;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 12px 24px;
+    font-size: 1rem;
+}
+
+.info-grid .lbl {
+    color: var(--text-muted);
+    font-size: 0.95rem;
+}
+
+/* Badges */
+.badge-gold {
+    background-color: var(--gold-light);
+    color: var(--primary-dark);
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+    border: 1px solid var(--gold);
+}
+
+.badge-success {
+    background-color: #E6F4EA;
+    color: #137333;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.badge-danger {
+    background-color: #FCE8E6;
+    color: #C5221F;
+    padding: 3px 8px;
+    border-radius: 4px;
+    font-weight: 700;
+}
+
+.text-retro {
+    color: #C5221F;
+    font-weight: bold;
+}
+
+/* Charts Layout - Side by Side (लग्न कुण्डली र नवमांश कुण्डली) */
+.charts-side-by-side-wrapper {
+    margin: 15px 0;
+}
+
+.charts-side-by-side-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    max-width: 960px;
+    margin: 0 auto;
+}
+
+.chart-item-col {
+    display: flex;
+    justify-content: center;
+}
+
+.chart-item-col .chart-wrapper {
+    width: 100%;
+    max-width: 440px;
+}
+
+@media (max-width: 600px) {
+    .charts-side-by-side-grid {
+        gap: 12px;
+    }
+    .chart-item-col .chart-wrapper {
+        padding: 6px;
+    }
+    .chart-item-col .chart-title {
+        font-size: 0.92rem;
+    }
+}
+
+@media (max-width: 540px) {
+    .charts-side-by-side-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.varga-nav-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding: 10px 14px;
+    background: #FFFDF9;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+}
+
+.varga-pill {
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: #FFF8E7;
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    cursor: pointer;
+    display: inline-block;
+}
+
+.varga-pill:hover {
+    background: var(--primary);
+    color: #FFFFFF;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* Shodashavarga Toggle Button & Section */
+.shodashavarga-toggle-box {
+    text-align: center;
+    margin: 28px 0 20px 0;
+    padding: 8px 0;
+}
+
+.shodashavarga-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    background: linear-gradient(135deg, #8B1113 0%, #A51D24 100%);
+    color: #FAF6EE;
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    padding: 11px 28px;
+    border: 1.5px solid #C6A45C;
+    border-radius: 30px;
+    cursor: pointer;
+    box-shadow: 0 4px 14px rgba(139, 17, 19, 0.22);
+    transition: all 0.25s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
+
+.shodashavarga-toggle-btn:hover {
+    background: linear-gradient(135deg, #A51D24 0%, #B9232A 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 17, 19, 0.32);
+    border-color: #E2C785;
+}
+
+.shodashavarga-toggle-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 8px rgba(139, 17, 19, 0.2);
+}
+
+.shodashavarga-toggle-btn.active {
+    background: linear-gradient(135deg, #101A33 0%, #263653 100%);
+    border-color: #C6A45C;
+    box-shadow: 0 4px 14px rgba(16, 26, 51, 0.25);
+}
+
+.shodashavarga-toggle-btn .btn-arrow {
+    font-size: 0.85rem;
+    transition: transform 0.25s ease;
+}
+
+.shodashavarga-extra-section {
+    margin-top: 15px;
+    padding-top: 18px;
+    border-top: 1.5px dashed #D8C8A8;
+    animation: fadeInSlideDown 0.35s ease forwards;
+}
+
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.shodashavarga-section-heading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin-bottom: 22px;
+    color: #8B1113;
+}
+
+.shodashavarga-section-heading h4 {
+    font-family: var(--font-chart);
+    font-size: 1.15rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+    margin: 0;
+}
+
+.shodashavarga-section-heading .heading-ornament {
+    color: #C6A45C;
+    font-size: 0.95rem;
+}
+
+.chart-item-col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-margin-top: 80px;
+}
+
+.chart-description-badge {
+    font-size: 0.82rem;
+    color: var(--text-muted);
+    margin-top: 6px;
+    text-align: center;
+    font-weight: 500;
+}
+
+.charts-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.chart-wrapper {
+    background: transparent;
+    border: none;
+    border-radius: 0;
+    padding: 8px 6px 14px;
+    text-align: center;
+    box-shadow: none;
+    flex: 1 1 340px;
+    max-width: 380px;
+    transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    position: relative;
+}
+
+.chart-wrapper:hover {
+    transform: translateY(-4px);
+    box-shadow: none;
+}
+
+.chart-title {
+    font-family: var(--font-chart);
+    font-size: 1.16rem;
+    font-weight: 700;
+    color: #8B1113;
+    margin-bottom: 12px;
+    letter-spacing: 0.4px;
+    display: inline-block;
+    padding: 5px 18px;
+    background: #FFFDF8;
+    border: 1.3px solid #C6A45C;
+    border-radius: 20px;
+    box-shadow: 0 2px 7px rgba(139, 17, 19, 0.08);
+}
+
+.kundali-svg {
+    width: 100%;
+    height: auto;
+    max-width: 350px;
+    display: block;
+    margin: 0 auto;
+    filter: drop-shadow(0 4px 12px rgba(16, 26, 51, 0.08));
+    border-radius: 6px;
+    transition: transform 0.3s ease, filter 0.3s ease;
+}
+
+.kundali-svg text {
+    font-family: var(--font-chart);
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+.kundali-svg:hover {
+    transform: translateY(-2px) scale(1.008);
+    filter: drop-shadow(0 8px 18px rgba(16, 26, 51, 0.12));
+}
+
+/* Styled Table */
+.styled-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.98rem;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.styled-table th, .styled-table td {
+    padding: 10px 14px;
+    text-align: left;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.styled-table th {
+    background: #F8F3EA;
+    color: var(--primary);
+    font-weight: 700;
+    border-bottom: 2px solid var(--gold);
+}
+
+.styled-table tbody tr:hover {
+    background-color: #FFFDF8;
+}
+
+.table-row-lagna {
+    background-color: #FFF5E6;
+}
+
+.row-active-dasha {
+    background-color: #FFF0D6;
+    font-weight: bold;
+}
+
+/* Dasha Summary Card */
+.dasha-summary-card {
+    background: #FFFDF6;
+    border: 1px solid var(--border-gold);
+    border-radius: 6px;
+    padding: 14px;
+    margin-bottom: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    font-size: 1.05rem;
+}
+
+/* Kundali Milan Score */
+.milan-score-banner {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    background: linear-gradient(135deg, #FFF8EE 0%, #FFF2DF 100%);
+    border: 2px solid var(--gold);
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.score-display {
+    text-align: center;
+    min-width: 120px;
+}
+
+.score-num {
+    font-size: 3rem;
+    font-weight: 800;
+    color: var(--primary);
+    line-height: 1;
+}
+
+.score-max {
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.verdict-display h3 {
+    font-size: 1.4rem;
+    color: var(--primary);
+    margin-bottom: 6px;
+}
+
+/* Single Page Janmapatrika Card & Collapsible Control */
+/* ====================================================
+   एकपाने परम्परागत नेपाली जन्मपत्रिका (Luxury A4 Janmapatrika)
+   Traditional-meets-modern Vedic Architecture
+   ==================================================== */
+
+/* Preview Card & Header Toolbar */
+#kundaliPatrikaCard.patrika-preview-card {
+    background: linear-gradient(135deg, #FFFDF9 0%, #FDF8EE 100%);
+    border: 1.5px solid #E2D4B7;
+    border-radius: 14px;
+    padding: 18px 24px;
+    margin-bottom: 26px;
+    box-shadow: 0 4px 16px rgba(139, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.patrika-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding-bottom: 0;
+    margin-bottom: 0;
+    transition: all 0.3s ease;
+}
+
+.patrika-card-header.expanded {
+    padding-bottom: 16px;
+    margin-bottom: 20px;
+    border-bottom: 1.5px solid rgba(197, 160, 89, 0.35);
+}
+
+.patrika-card-title-box .card-title {
+    margin-bottom: 3px;
+    border-bottom: none;
+    padding-bottom: 0;
+    color: #800020;
+    font-family: 'Noto Serif Devanagari', 'Martel', serif;
+    font-size: 1.3rem;
+    font-weight: 800;
+}
+
+.patrika-card-desc {
+    font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    font-size: 0.88rem;
+    color: #64748B;
+    margin: 0;
+}
+
+.patrika-card-actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.btn-patrika-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 9px 18px;
+    background: #FFFDF9;
+    color: #800020;
+    border: 1.5px solid #800020;
+    border-radius: 8px;
+    font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(128, 0, 32, 0.06);
+}
+
+.btn-patrika-toggle:hover {
+    background: #800020;
+    color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(128, 0, 32, 0.2);
+    transform: translateY(-1px);
+}
+
+.btn-patrika-toggle.active {
+    background: #800020;
+    color: #FFFFFF;
+    border-color: #600810;
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.patrika-collapsible-container {
+    animation: fadeInPatrika 0.35s ease;
+}
+
+@keyframes fadeInPatrika {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ====================================================
+   Screen Presentation: Centered on Desk Surface
+   ==================================================== */
+.patrika-outer {
+    max-width: 860px;
+    margin: 0 auto 12px auto;
+    background: #ECE7DE;
+    padding: 28px 20px;
+    border-radius: 12px;
+    box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.06), 0 1px 3px rgba(0, 0, 0, 0.04);
+    display: flex;
+    justify-content: center;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+}
+
+.patrika-border {
+    position: relative;
+    width: 724px;
+    height: 1024px;
+    flex-shrink: 0;
+    background: #FFFDF9 url('../assets/patrika_bg.jpg') no-repeat center top;
+    background-size: 100% 100%;
+    border: none !important;
+    box-shadow: 0 14px 40px rgba(44, 24, 16, 0.2), 0 4px 10px rgba(44, 24, 16, 0.08);
+    box-sizing: border-box;
+    /* Margin clearance: Below top Ganesha (114px), above bottom lotus flowers (140px), inside ornate side borders (54px) */
+    padding: 114px 54px 140px 54px;
+    overflow: hidden;
+    border-radius: 3px;
+}
+
+.patrika-border::before {
+    display: none !important;
+}
+
+/* Celestial Vedashchakshu Watermark */
+.patrika-watermark {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 360px;
+    height: 360px;
+    background: url('../assets/watermark_bg.png') no-repeat center center;
+    background-size: contain;
+    opacity: 0.065;
+    mix-blend-mode: multiply;
+    pointer-events: none;
+    user-select: none;
+    z-index: 1;
+}
+
+.patrika-content {
+    position: relative;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+/* 1. मङ्गलाचरण तथा मङ्गल श्लोक (Invocation) */
+.patrika-top-area {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.patrika-shloka-box {
+    border: none;
+    background: transparent;
+    padding: 0;
+    text-align: center;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.shloka-namah {
+    font-family: 'Noto Serif Devanagari', 'Tiro Devanagari Sanskrit', serif;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #800020;
+    letter-spacing: 0.8px;
+    margin-bottom: 1.5px;
+    line-height: 1.25;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.shloka-main {
+    font-family: 'Noto Serif Devanagari', 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.86rem;
+    font-weight: 600;
+    color: #800020;
+    line-height: 1.38;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.patrika-divider-ornament {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 82%;
+    margin: 3px auto 2px auto;
+    color: #C5A059;
+    font-size: 0.72rem;
+}
+
+.patrika-divider-ornament .ornament-line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, #C5A059, transparent);
+}
+
+.patrika-divider-ornament .ornament-center {
+    color: #800020;
+    font-size: 0.82rem;
+    font-weight: bold;
+}
+
+.patrika-divider-ornament .ornament-sym {
+    color: #C5A059;
+    font-size: 0.65rem;
+}
+
+/* 2. परम्परागत संस्कृत जन्मपत्रिका गद्य संकल्प (Vedic Manuscript Style) */
+.patrika-sanskrit-prose {
+    font-family: 'Noto Serif Devanagari', 'Martel', serif;
+    color: #1F2937;
+    font-size: 0.76rem;
+    line-height: 1.45;
+    text-align: justify;
+    text-justify: inter-word;
+    margin: 2px 0 3px 0;
+    padding: 0 1px;
+    word-break: keep-all;
+    overflow-wrap: break-word;
+}
+
+.patrika-sanskrit-prose p {
+    margin-bottom: 2.5px;
+    text-indent: 1.4em;
+}
+
+.patrika-sanskrit-prose p:last-child {
+    margin-bottom: 0;
+}
+
+.val-red {
+    color: #991B1B;
+    font-weight: 700;
+}
+
+.val-bold {
+    color: #1C1917;
+    font-weight: 700;
+}
+
+.val-uline {
+    color: #1C1917;
+    font-weight: 700;
+    text-decoration: underline;
+    text-decoration-color: #991B1B;
+    text-underline-offset: 2px;
+}
+
+/* 3. जन्मकालीन ग्रहस्पष्ट सारिणी (Planetary Positions Table) */
+.patrika-spashta-wrapper {
+    margin: 2px 0 3px 0 !important;
+    width: 100% !important;
+}
+
+.patrika-section-header {
+    font-family: 'Noto Serif Devanagari', 'Martel', serif;
+    font-size: 0.76rem;
+    font-weight: 800;
+    color: #800020;
+    text-align: center;
+    margin-bottom: 2px;
+    letter-spacing: 0.4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.sec-ornament,
+.patrika-section-header .ornament-sym {
+    color: #C5A059;
+    font-size: 0.62rem;
+}
+
+.patrika-border .patrika-spashta-table {
+    width: 100% !important;
+    border-collapse: collapse !important;
+    border: 1.2px solid #7A0C16 !important;
+    background: rgba(255, 255, 255, 0.95) !important;
+    box-shadow: 0 1px 3px rgba(44, 24, 16, 0.05) !important;
+    margin: 0 auto !important;
+    table-layout: auto !important;
+    border-radius: 3px;
+    overflow: hidden;
+}
+
+.patrika-border .patrika-spashta-table th {
+    background: linear-gradient(180deg, #7A0C16 0%, #5E0911 100%) !important;
+    color: #FFFFFF !important;
+    font-family: 'Noto Serif Devanagari', 'Martel', serif !important;
+    font-weight: 700 !important;
+    padding: 2px 3px !important;
+    font-size: 0.65rem !important;
+    line-height: 1.15 !important;
+    text-align: center !important;
+    border: 0.8px solid #5E0911 !important;
+    border-right: 0.6px solid rgba(197, 160, 89, 0.35) !important;
+    letter-spacing: 0.2px !important;
+}
+
+.patrika-border .patrika-spashta-table th:last-child {
+    border-right: 0.8px solid #5E0911 !important;
+}
+
+.patrika-border .patrika-spashta-table td {
+    border: 0.8px solid #E2D4B7 !important;
+    padding: 1.4px 3px !important;
+    text-align: center !important;
+    font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif !important;
+    font-size: 0.65rem !important;
+    line-height: 1.15 !important;
+    font-weight: 600 !important;
+    color: #1E293B !important;
+    font-variant-numeric: tabular-nums;
+}
+
+.patrika-border .patrika-spashta-table tbody tr:nth-child(even) {
+    background: rgba(254, 250, 242, 0.85) !important;
+}
+
+.patrika-border .patrika-spashta-table tbody tr:hover {
+    background: rgba(254, 243, 199, 0.5) !important;
+}
+
+.patrika-border .patrika-spashta-table tr.table-row-lagna {
+    background: #FEF3C7 !important;
+    font-weight: 700 !important;
+}
+
+.cell-graha-name {
+    font-weight: 800 !important;
+    color: #800020 !important;
+    font-family: 'Noto Serif Devanagari', serif !important;
+}
+
+.text-vakri {
+    color: #B91C1C !important;
+    font-weight: 800;
+}
+
+/* मुख्य ट्याब कार्ड भित्रको ग्रहस्पष्ट तालिका (Main Page Table - Card Outside Patrika) */
+.card:not(.patrika-preview-card) .patrika-spashta-table {
+    margin-top: 6px;
+    border-radius: 6px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.card:not(.patrika-preview-card) .patrika-spashta-table th {
+    padding: 9px 8px;
+    font-size: 0.95rem;
+}
+
+.card:not(.patrika-preview-card) .patrika-spashta-table td {
+    padding: 8px 8px;
+    font-size: 0.95rem;
+}
+
+/* 4. कुण्डली चक्रहरू (Lagna & Navamsha Charts) */
+.patrika-charts-area {
+    display: flex !important;
+    flex-direction: row !important;
+    justify-content: center !important;
+    align-items: center !important;
+    margin: 3px 0 !important;
+    gap: 16px !important;
+    width: 100% !important;
+}
+
+.patrika-single-chart {
+    flex: 0 1 auto !important;
+    border: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    box-shadow: none !important;
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+}
+
+.patrika-single-chart .chart-wrapper {
+    border: none !important;
+    box-shadow: none !important;
+    padding: 0 !important;
+    background: transparent !important;
+    text-align: center !important;
+}
+
+.patrika-single-chart .chart-title {
+    font-family: 'Noto Serif Devanagari', 'Martel', serif !important;
+    font-size: 0.76rem !important;
+    font-weight: 700 !important;
+    color: #800020 !important;
+    padding: 1.5px 14px !important;
+    margin: 0 auto 2.5px auto !important;
+    display: inline-block !important;
+    background: #FFFDF9 !important;
+    border: 1px solid #C5A059 !important;
+    border-radius: 9999px !important;
+    box-shadow: 0 1px 3px rgba(128, 0, 32, 0.08) !important;
+    line-height: 1.25 !important;
+}
+
+.patrika-single-chart svg {
+    width: 180px !important;
+    height: 180px !important;
+    background: rgba(255, 255, 255, 0.88) !important;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(44, 24, 16, 0.08);
+}
+
+/* 5. जन्मकालिक भोग्यदशा विवरण (Bhogya Dasha Box) */
+.patrika-bhogya-dasha-box {
+    margin: 2px 0;
+    padding: 2.5px 5px;
+    background: rgba(255, 253, 248, 0.94);
+    border: 1px solid #C5A059;
+    border-radius: 4px;
+    box-shadow: 0 1px 2px rgba(44, 24, 16, 0.04);
+}
+
+.patrika-bhogya-title {
+    font-family: 'Noto Serif Devanagari', 'Martel', serif;
+    font-size: 0.74rem;
+    font-weight: 800;
+    color: #800020;
+    text-align: center;
+    margin-bottom: 2px;
+    letter-spacing: 0.3px;
+    line-height: 1.2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+}
+
+.patrika-bhogya-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 4px;
+    text-align: center;
+}
+
+.bhogya-item {
+    font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    font-size: 0.67rem;
+    background: #FFFDF9;
+    border: 0.8px solid #E2D4B7;
+    border-radius: 3px;
+    padding: 1.5px 2px;
+    line-height: 1.18;
+}
+
+.bhogya-label {
+    display: block;
+    font-weight: 700;
+    color: #800020;
+    font-size: 0.66rem;
+}
+
+.bhogya-val {
+    display: block;
+    color: #1F2937;
+    font-weight: 600;
+    margin: 0.5px 0;
+}
+
+.bhogya-val strong {
+    color: #991B1B;
+}
+
+.bhogya-bal {
+    display: block;
+    color: #57534E;
+    font-size: 0.64rem;
+}
+
+.bhogya-bal strong {
+    color: #1C1917;
+}
+
+/* 6. अन्त्यमा शुभाशीर्वाद तथा ज्योतिष पण्डितको नाम (Auspicious Blessing & Signature) */
+.patrika-footer-area {
+    border-top: 1px dashed #C5A059;
+    padding-top: 2px;
+    margin-top: 1px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    gap: 1.5px;
+}
+
+.patrika-blessing-text {
+    width: 100%;
+    font-family: 'Noto Serif Devanagari', 'Tiro Devanagari Sanskrit', serif;
+    font-size: 0.82rem;
+    font-weight: 800;
+    color: #800020;
+    text-align: center;
+    letter-spacing: 0.4px;
+    margin: 0.5px 0;
+    line-height: 1.2;
+    text-shadow: 0 1px 1px rgba(255, 255, 255, 0.85);
+}
+
+.patrika-pandit-signature {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: baseline;
+    gap: 5px;
+    font-family: 'Noto Sans Devanagari', 'Mukta', sans-serif;
+    font-size: 0.72rem;
+    color: #475569;
+    padding-right: 6px;
+    line-height: 1.2;
+}
+
+.patrika-pandit-signature .pandit-title {
+    font-weight: 700;
+    color: #800020;
+}
+
+.patrika-pandit-signature .pandit-line {
+    color: #78716C;
+    letter-spacing: 1px;
+}
+
+.patrika-pandit-signature .pandit-hastakshar {
+    font-size: 0.65rem;
+    color: #78716C;
+}
+
+/* ====================================================
+   Print Media Styles (Strict Single Page A4 Print & PDF)
+   ==================================================== */
+@media print {
+    @page {
+        size: A4 portrait;
+        margin: 0 !important;
+    }
+
+    html, body {
+        background: #FFFFFF !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        overflow: hidden !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .app-header,
+    .nav-tabs-wrapper,
+    .global-siddhanta-bar,
+    #globalSiddhantaNotice,
+    .no-print,
+    .btn-small-download,
+    #pDownloadBtn,
+    .site-watermark-bg,
+    footer,
+    .modal {
+        display: none !important;
+    }
+
+    .tab-content:not(#tab-kundali) {
+        display: none !important;
+    }
+
+    #tab-kundali {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    #tab-kundali > *:not(#kundaliOutputSection) {
+        display: none !important;
+    }
+
+    #kundaliOutputSection {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    #kundaliOutputSection > *:not(#kundaliPatrikaCard) {
+        display: none !important;
+    }
+
+    #kundaliPatrikaCard {
+        display: block !important;
+        border: none !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        background: transparent !important;
+    }
+
+    .patrika-card-header {
+        display: none !important;
+    }
+
+    .patrika-collapsible-container {
+        display: block !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    .patrika-outer {
+        display: flex !important;
+        box-shadow: none !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        max-width: 210mm !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        background: transparent !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .patrika-border {
+        border: none !important;
+        width: 210mm !important;
+        height: 297mm !important;
+        max-height: 297mm !important;
+        box-shadow: none !important;
+        background: url('../assets/patrika_bg.jpg') no-repeat center top !important;
+        background-size: 100% 100% !important;
+        /* Exact print padding for A4 frame: 33mm top (under Ganesha), 41mm bottom (above lotus), 16mm sides */
+        padding: 33mm 16mm 41mm 16mm !important;
+        box-sizing: border-box !important;
+        overflow: hidden !important;
+        page-break-inside: avoid !important;
+        break-inside: avoid !important;
+    }
+
+    .patrika-watermark {
+        opacity: 0.065 !important;
+        width: 105mm !important;
+        height: 105mm !important;
+        background: url('../assets/watermark_bg.png') no-repeat center center !important;
+        background-size: contain !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-top-area {
+        margin-bottom: 1.2mm !important;
+    }
+
+    .shloka-namah {
+        font-size: 11.5pt !important;
+        margin-bottom: 0.5mm !important;
+        line-height: 1.2 !important;
+    }
+
+    .shloka-main {
+        font-size: 9.2pt !important;
+        line-height: 1.35 !important;
+    }
+
+    .patrika-divider-ornament {
+        margin: 1mm auto !important;
+        font-size: 7pt !important;
+    }
+
+    .patrika-sanskrit-prose {
+        font-size: 8.2pt !important;
+        line-height: 1.42 !important;
+        margin: 1.5mm 0 2mm 0 !important;
+        padding: 0 !important;
+    }
+
+    .patrika-sanskrit-prose p {
+        margin-bottom: 1mm !important;
+        text-indent: 3.5mm !important;
+    }
+
+    .patrika-spashta-wrapper {
+        margin: 1.5mm 0 2mm 0 !important;
+    }
+
+    .patrika-section-header {
+        font-size: 8.2pt !important;
+        margin-bottom: 1mm !important;
+    }
+
+    .patrika-spashta-table {
+        border-width: 0.8px !important;
+        background: rgba(255, 255, 255, 0.96) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-spashta-table th {
+        padding: 0.8mm 0.6mm !important;
+        font-size: 6.8pt !important;
+        line-height: 1.1 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-spashta-table td {
+        padding: 0.6mm 0.6mm !important;
+        font-size: 6.8pt !important;
+        line-height: 1.1 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-charts-area {
+        margin: 1.5mm 0 2mm 0 !important;
+        gap: 6mm !important;
+    }
+
+    .patrika-single-chart {
+        max-width: 56mm !important;
+    }
+
+    .patrika-single-chart .chart-title {
+        font-size: 7.8pt !important;
+        padding: 0.6mm 3mm !important;
+        margin: 0 auto 1mm auto !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-single-chart svg {
+        width: 54mm !important;
+        height: 54mm !important;
+        background: rgba(255, 255, 255, 0.92) !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-bhogya-dasha-box {
+        margin: 1.2mm 0 !important;
+        padding: 1mm 1.5mm !important;
+        background: rgba(255, 253, 248, 0.96) !important;
+        border-width: 0.8px !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .patrika-bhogya-title {
+        font-size: 7.2pt !important;
+        margin-bottom: 0.8mm !important;
+    }
+
+    .bhogya-item {
+        font-size: 6.4pt !important;
+        padding: 0.6mm 1mm !important;
+        line-height: 1.15 !important;
+        -webkit-print-color-adjust: exact !important;
+        print-color-adjust: exact !important;
+    }
+
+    .bhogya-label {
+        font-size: 6.3pt !important;
+    }
+
+    .bhogya-bal {
+        font-size: 6.1pt !important;
+    }
+
+    .patrika-footer-area {
+        padding-top: 1mm !important;
+        margin-top: 1mm !important;
+        gap: 0.8mm !important;
+    }
+
+    .patrika-blessing-text {
+        font-size: 8.2pt !important;
+        margin: 0.4mm 0 !important;
+    }
+
+    .patrika-pandit-signature {
+        font-size: 7pt !important;
+        margin-top: 0.5mm !important;
+        padding-right: 2mm !important;
+    }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+    .header-container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .header-titles h1 {
+        font-size: 1.6rem;
+    }
+
+    .patrika-details-grid {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .patrika-footer-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ====================================================
+ * दैनिक पञ्चाङ्ग (फोटो कार्ड शैली - Daily Panchang Photo Card)
+ * ==================================================== */
+
+.panchang-header-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 14px;
+    padding: 2px 0;
+}
+
+.panchang-header-title {
+    margin-bottom: 0 !important;
+    border-bottom: none !important;
+    padding-bottom: 0 !important;
+    font-size: 1.35rem;
+    color: var(--primary);
+    white-space: nowrap;
+}
+
+.panchang-header-right {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.panchang-date-inline {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.panchang-date-label {
+    font-weight: 600;
+    color: #4B5563;
+    font-size: 0.92rem;
+    white-space: nowrap;
+}
+
+.date-triplet-compact {
+    display: flex;
+    gap: 6px;
+    align-items: center;
+}
+
+.select-compact {
+    padding: 6px 10px !important;
+    font-size: 0.92rem !important;
+    height: auto !important;
+    border-radius: 6px !important;
+    border: 1.5px solid #D1D5DB !important;
+    background: #FFFFFF !important;
+    cursor: pointer;
+}
+
+.select-compact:focus {
+    border-color: var(--primary) !important;
+    box-shadow: 0 0 0 2px rgba(139, 0, 0, 0.1) !important;
+}
+
+/* ====================================================
+   पञ्चाङ्ग शास्त्रीय संकल्प शिरोभाग (Panchang Sankalpa Banner)
+   ==================================================== */
+.panchang-sankalpa-banner {
+    background: #FFFFFF;
+    border: 1px solid #E2E8F0;
+    border-top: 3.5px solid #9F1239;
+    border-radius: 16px;
+    padding: 16px 26px;
+    margin-bottom: 22px;
+    box-shadow: 0 4px 18px -2px rgba(15, 23, 42, 0.05), 0 2px 6px -1px rgba(15, 23, 42, 0.02);
+    position: relative;
+    text-align: center;
+    transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.panchang-sankalpa-banner:hover {
+    box-shadow: 0 8px 26px -4px rgba(15, 23, 42, 0.08), 0 3px 8px -2px rgba(15, 23, 42, 0.03);
+    border-color: #CBD5E1;
+}
+
+.sankalpa-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    z-index: 1;
+}
+
+.sankalpa-text {
+    font-family: 'Mukta', 'Noto Sans Devanagari', 'Yantramanav', sans-serif;
+    font-size: 1.12rem;
+    font-weight: 500;
+    line-height: 1.95;
+    letter-spacing: 0.2px;
+    color: #334155;
+    text-shadow: none;
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 6px 10px;
+}
+
+.sankalpa-era-title {
+    color: #881337;
+    font-weight: 700;
+}
+
+.sankalpa-accent {
+    color: #0F172A;
+    font-weight: 700;
+}
+
+.sankalpa-highlight {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    color: #92400E;
+    font-weight: 700;
+    font-size: 0.98rem;
+    background: #FEF3C7;
+    padding: 3px 14px;
+    border-radius: 9999px;
+    border: 1px solid #FDE68A;
+    box-shadow: 0 1px 2px rgba(217, 119, 6, 0.08);
+    vertical-align: middle;
+}
+
+.sankalpa-subname {
+    color: #B45309;
+    font-weight: 700;
+}
+
+.sankalpa-tag {
+    color: #15803D;
+    font-weight: 600;
+}
+
+.sankalpa-samvat {
+    color: #9F1239;
+    font-weight: 700;
+}
+
+.sankalpa-sep {
+    color: #CBD5E1;
+    font-weight: 400;
+    font-size: 0.85rem;
+    padding: 0 3px;
+    user-select: none;
+}
+
+@media (max-width: 768px) {
+    .panchang-sankalpa-banner {
+        padding: 12px 16px;
+        margin-bottom: 16px;
+        border-radius: 12px;
+    }
+    .sankalpa-text {
+        font-size: 0.98rem;
+        line-height: 1.8;
+        gap: 4px 8px;
+    }
+    .sankalpa-highlight {
+        font-size: 0.9rem;
+        padding: 2px 10px;
+    }
+}
+
+/* ====================================================
+   पञ्चाङ्ग तथा प्रत्यक्ष एनालग घडी लेआउट
+   ==================================================== */
+.panchang-desktop-layout {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 32px;
+    margin: 15px auto 25px auto;
+    max-width: 1100px;
+    width: 100%;
+}
+
+.panchang-card-col {
+    flex: 0 1 680px;
+    max-width: 680px;
+    width: 100%;
+}
+
+.panchang-card-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 0 auto;
+    width: 100%;
+}
+
+.panchang-clock-col {
+    flex: 0 0 340px;
+    width: 340px;
+    position: sticky;
+    top: 20px;
+}
+
+.panchang-clock-card {
+    background: #FFFFFF;
+    border: 2px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 22px 18px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.panchang-clock-card::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: linear-gradient(90deg, #9D1C1D, #D97706, #9D1C1D);
+}
+
+.clock-card-header {
+    margin-bottom: 10px;
+}
+
+.clock-live-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: #FEF2F2;
+    color: #DC2626;
+    border: 1px solid #FECACA;
+    border-radius: 14px;
+    padding: 3px 10px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    margin-bottom: 6px;
+}
+
+.live-dot {
+    width: 7px;
+    height: 7px;
+    background: #DC2626;
+    border-radius: 50%;
+    animation: liveDotPulse 1.6s infinite;
+}
+
+@keyframes liveDotPulse {
+    0% { transform: scale(0.9); opacity: 0.8; }
+    50% { transform: scale(1.3); opacity: 1; }
+    100% { transform: scale(0.9); opacity: 0.8; }
+}
+
+.clock-card-title {
+    font-size: 1.35rem;
+    font-weight: 800;
+    color: #1F2937;
+    margin: 2px 0;
+    font-family: 'Mukta', 'Noto Serif Devanagari', sans-serif;
+}
+
+.clock-card-subtitle {
+    font-size: 0.82rem;
+    color: #6B7280;
+    margin: 0;
+    font-weight: 600;
+}
+
+.clock-wrapper {
+    display: flex;
+    justify-content: center;
+    margin: 10px 0 16px 0;
+}
+
+/* ====================================================
+   आकर्षक एनालग घडी (Analog Clock)
+   ==================================================== */
+.clock {
+    width: 210px;
+    height: 210px;
+    border: 8px solid #7A1214;
+    outline: 2.5px solid #D4AF37;
+    border-radius: 50%;
+    position: relative;
+    background: radial-gradient(circle at center, #FFFFFF 56%, #FCF8ED 86%, #EFE5CD 100%);
+    margin: 10px auto;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.16), inset 0 2px 8px rgba(0, 0, 0, 0.22);
+    user-select: none;
+}
+
+.clock::before {
+    content: "";
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    right: 6px;
+    bottom: 6px;
+    border: 1px dashed rgba(180, 83, 9, 0.35);
+    border-radius: 50%;
+    pointer-events: none;
+}
+
+/* घडीका १२ अंकहरू (devanagari numerals) */
+.clock-num {
+    position: absolute;
+    width: 28px;
+    height: 28px;
+    line-height: 28px;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    margin: -14px 0 0 -14px;
+    font-family: 'Mukta', 'Noto Serif Devanagari', serif;
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #1F2937;
+}
+
+.clock-num.num-12 { transform: translate(0px, -82px); }
+.clock-num.num-1  { transform: translate(41px, -71px); }
+.clock-num.num-2  { transform: translate(71px, -41px); }
+.clock-num.num-3  { transform: translate(82px, 0px); }
+.clock-num.num-4  { transform: translate(71px, 41px); }
+.clock-num.num-5  { transform: translate(41px, 71px); }
+.clock-num.num-6  { transform: translate(0px, 82px); }
+.clock-num.num-7  { transform: translate(-41px, 71px); }
+.clock-num.num-8  { transform: translate(-71px, 41px); }
+.clock-num.num-9  { transform: translate(-82px, 0px); }
+.clock-num.num-10 { transform: translate(-71px, -41px); }
+.clock-num.num-11 { transform: translate(-41px, -71px); }
+
+/* डायल भित्र ब्रान्डिङ */
+.clock-dial-watermark {
+    position: absolute;
+    top: 58px;
+    left: 50%;
+    transform: translateX(-50%);
+    text-align: center;
+    pointer-events: none;
+}
+
+.clock-brand-nepal {
+    font-family: 'Mukta', sans-serif;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #B45309;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+}
+
+/* घडीका सुईहरू (Hands) */
+.hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: bottom center;
+    background: #333;
+    border-radius: 5px;
+    transform: translateX(-50%);
+}
+
+.hour {
+    width: 6px;
+    height: 52px;
+    background: #111827;
+    border-radius: 4px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+    z-index: 2;
+}
+
+.minute {
+    width: 4px;
+    height: 72px;
+    background: #374151;
+    border-radius: 3px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    z-index: 3;
+}
+
+.second {
+    width: 2px;
+    height: 84px;
+    background: #DC2626;
+    border-radius: 2px;
+    box-shadow: 0 2px 6px rgba(220, 38, 38, 0.45);
+    z-index: 4;
+}
+
+.second::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 18px;
+    background: #DC2626;
+}
+
+.center-dot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 14px;
+    height: 14px;
+    background: radial-gradient(circle, #FDE68A 25%, #D97706 70%, #78350F 100%);
+    border: 2px solid #1E293B;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.4);
+    z-index: 10;
+}
+
+/* डिजिटल समय प्रदर्शन */
+.clock-digital-box {
+    background: #F9FAFB;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    padding: 10px 12px;
+    margin-bottom: 12px;
+}
+
+.clock-digital-time {
+    font-size: 1.38rem;
+    font-weight: 800;
+    color: #111827;
+    font-family: 'Mukta', 'Noto Serif Devanagari', monospace;
+    letter-spacing: 0.5px;
+}
+
+.clock-digital-time .time-ampm {
+    font-size: 0.85rem;
+    color: #9D1C1D;
+    font-weight: 700;
+    margin-left: 4px;
+}
+
+.clock-digital-date {
+    font-size: 0.86rem;
+    color: #4B5563;
+    font-weight: 600;
+    margin-top: 3px;
+}
+
+/* वैदिक समय विवरण (इष्टकाल आदि) */
+.clock-vedic-details {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-align: left;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.clock-vedic-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+}
+
+.clock-vedic-row .v-label {
+    color: #78350F;
+    font-weight: 600;
+}
+
+.clock-vedic-row .v-val {
+    color: #92400E;
+    font-weight: 700;
+}
+
+.text-maroon {
+    color: #9D1C1D !important;
+}
+
+/* रेस्पोन्सिभ समायोजन */
+@media (max-width: 1024px) {
+    .panchang-desktop-layout {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+    .panchang-clock-col {
+        width: 100%;
+        max-width: 440px;
+        position: static;
+        order: -1;
+    }
+    .panchang-card-col {
+        max-width: 100%;
+    }
+}
+
+/* मुख्य पञ्चाङ्ग फोटो कार्ड */
+.panchang-photo-card {
+    background-color: #FFFDF9;
+    background-image: radial-gradient(#F5EEDB 0.75px, transparent 0.75px);
+    background-size: 16px 16px;
+    border: 3.5px solid #9D1C1D;
+    padding: 16px;
+    box-shadow: 0 10px 35px rgba(157, 28, 29, 0.15);
+    width: 100%;
+    max-width: 680px;
+    position: relative;
+    font-family: 'Mukta', 'Noto Sans Devanagari', -apple-system, sans-serif;
+    color: #9D1C1D;
+}
+
+/* आन्तरिक परम्परागत सजावटी बोर्डर */
+.card-ornament-border {
+    border: 1.5px solid #9D1C1D;
+    padding: 18px 22px;
+    position: relative;
+}
+
+.card-ornament-border::before {
+    content: "";
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    right: 3px;
+    bottom: 3px;
+    border: 0.8px dashed #B83232;
+    pointer-events: none;
+}
+
+/* Header: दैनिक पञ्चाङ्ग */
+.panchang-card-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-bottom: 10px;
+}
+
+.panchang-title-text {
+    font-size: 2.5rem;
+    font-weight: 800;
+    color: #9D1C1D;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    text-shadow: 0.5px 0.5px 0px rgba(157, 28, 29, 0.3);
+}
+
+.deco-line {
+    height: 3px;
+    flex: 1;
+    max-width: 70px;
+    background: linear-gradient(90deg, transparent, #9D1C1D);
+}
+
+.deco-line:last-child {
+    background: linear-gradient(90deg, #9D1C1D, transparent);
+}
+
+/* मिति ब्यानर */
+.panchang-date-banner {
+    text-align: center;
+    font-size: 1.65rem;
+    font-weight: 800;
+    color: #9D1C1D;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.card-ad-date {
+    font-family: 'Cinzel', 'Mukta', serif;
+    font-size: 1.35rem;
+    font-weight: 700;
+    letter-spacing: 0.5px;
+}
+
+/* शालिवाहन शाके र नेपाल संवत् पिल्स */
+.panchang-era-pills {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 18px;
+    flex-wrap: wrap;
+}
+
+.era-pill {
+    border: 1.8px solid #9D1C1D;
+    border-radius: 25px;
+    padding: 4px 22px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #9D1C1D;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 5px rgba(157, 28, 29, 0.06);
+}
+
+/* मुख्य ग्रिड (बायाँ विवरण + दायाँ तालिका) */
+.panchang-main-grid {
+    display: grid;
+    grid-template-columns: 1fr 1.35fr;
+    gap: 18px;
+    align-items: center;
+    margin-bottom: 18px;
+}
+
+/* बायाँ स्तम्भ */
+.panchang-left-col {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding-left: 6px;
+}
+
+.panchang-item {
+    font-size: 1.25rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    line-height: 1.6;
+    color: #9D1C1D;
+}
+
+.panchang-item .bullet {
+    font-size: 1.4rem;
+    line-height: 1;
+    color: #9D1C1D;
+}
+
+.panchang-item .label {
+    min-width: 65px;
+    font-weight: 600;
+}
+
+.panchang-item .pipe {
+    font-weight: bold;
+    color: #9D1C1D;
+}
+
+.panchang-item .val {
+    font-weight: 700;
+}
+
+.bold-val {
+    font-weight: 800 !important;
+}
+
+.panchang-sun-divider {
+    border-bottom: 2px solid #9D1C1D;
+    margin: 8px 0;
+    width: 92%;
+}
+
+/* दायाँ तालिका (卐 सहित) */
+.panchang-right-col {
+    display: flex;
+    justify-content: center;
+}
+
+.panchang-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border: 2px solid #9D1C1D;
+    border-radius: 14px;
+    overflow: hidden;
+    background-color: #FFFFFF;
+}
+
+.panchang-table tr:not(:last-child) td {
+    border-bottom: 1.8px solid #9D1C1D;
+}
+
+.panchang-table td:not(:last-child) {
+    border-right: 1.8px solid #9D1C1D;
+}
+
+.panchang-table td {
+    padding: 7px 10px;
+    text-align: center;
+    color: #9D1C1D;
+    font-size: 1.15rem;
+    font-weight: 700;
+}
+
+.swastik-cell {
+    width: 38px;
+    font-size: 1.35rem !important;
+    font-weight: normal !important;
+    color: #9D1C1D;
+}
+
+.field-cell {
+    width: 62px;
+    font-weight: 700;
+}
+
+.name-cell {
+    font-size: 1.2rem;
+    font-weight: 800;
+}
+
+.time-cell {
+    font-size: 1.15rem;
+    font-family: inherit;
+    font-weight: 700;
+}
+
+/* तल्लो पिल्स (चन्द्र राशि, सूर्य राशि, गुरु राशि) */
+.panchang-bottom-pills {
+    display: flex;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 6px;
+    flex-wrap: wrap;
+}
+
+.rashi-pill {
+    border: 1.8px solid #9D1C1D;
+    border-radius: 25px;
+    padding: 6px 18px;
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #9D1C1D;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(157, 28, 29, 0.08);
+}
+
+/* Responsive for Photo Card */
+@media (max-width: 640px) {
+    .panchang-main-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .panchang-title-text {
+        font-size: 2rem;
+    }
+
+    .panchang-date-banner {
+        font-size: 1.35rem;
+    }
+
+    .era-pill, .rashi-pill {
+        font-size: 1rem;
+        padding: 4px 14px;
+    }
+}
+
+/* Refresh Icon Button next to Panchanga Title */
+.refresh-icon-btn {
+    background: #FFFDF9;
+    border: 1.5px solid var(--gold);
+    border-radius: 50%;
+    width: 34px;
+    height: 34px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    color: var(--primary);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    transition: all 0.25s ease;
+    vertical-align: middle;
+}
+
+.refresh-icon-btn:hover {
+    background: #FFF2DF;
+    border-color: var(--primary);
+    transform: rotate(180deg);
+}
+
+/* Refresh Text Button with Round Arrow Icon */
+.btn-refresh-text {
+    background: #FFFDF9;
+    color: var(--primary);
+    border: 1.5px solid var(--gold);
+    border-radius: 20px;
+    padding: 5px 15px 5px 11px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: 'Mukta', sans-serif;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 2px 6px rgba(139, 0, 0, 0.06);
+    transition: all 0.25s ease;
+    vertical-align: middle;
+}
+
+.btn-refresh-text:hover {
+    background: #FFF2DF;
+    border-color: var(--primary);
+    color: var(--primary);
+    box-shadow: 0 4px 10px rgba(139, 0, 0, 0.12);
+    transform: translateY(-1px);
+}
+
+.btn-refresh-text .refresh-spin-icon {
+    transition: transform 0.4s ease;
+    flex-shrink: 0;
+    display: inline-block;
+    color: var(--primary);
+}
+
+.btn-refresh-text:hover .refresh-spin-icon {
+    transform: rotate(180deg);
+}
+
+.btn-refresh-text.rotating .refresh-spin-icon {
+    animation: refreshSpin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+@keyframes refreshSpin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* Compact Download Button below Panchang Card */
+.btn-small-download {
+    background: #FFFFFF;
+    color: #9D1C1D;
+    border: 1.8px solid #9D1C1D;
+    padding: 7px 20px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
+    border-radius: 20px;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    box-shadow: 0 2px 6px rgba(157, 28, 29, 0.1);
+    transition: all 0.2s ease;
+}
+
+.btn-small-download:hover {
+    background: #9D1C1D;
+    color: #FFFFFF;
+    box-shadow: 0 4px 10px rgba(157, 28, 29, 0.25);
+    transform: translateY(-1px);
+}
+
+/* ====================================================
+ * सुरक्षित कुण्डलीहरू मोडल तथा सूची शैली (Saved Kundalis Styles)
+ * ==================================================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.65);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    backdrop-filter: blur(4px);
+    animation: fadeIn 0.2s ease;
+}
+
+.modal-card {
+    background: #FFFFFF;
+    border-radius: 12px;
+    width: 92%;
+    max-width: 680px;
+    max-height: 85vh;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+    border: 2px solid var(--border-gold);
+    overflow: hidden;
+}
+
+.modal-header {
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+    color: #FFFFFF;
+    padding: 16px 22px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    border-bottom: 3px solid var(--gold);
+}
+
+.modal-header h3 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    margin: 0;
+}
+
+.modal-close-btn {
+    background: none;
+    border: none;
+    color: #FFFFFF;
+    font-size: 2rem;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 6px;
+    transition: color 0.2s;
+}
+
+.modal-close-btn:hover {
+    color: var(--gold-light);
+}
+
+.modal-body {
+    padding: 20px;
+    overflow-y: auto;
+}
+
+.saved-item-card {
+    background: #FFFDF9;
+    border: 1px solid var(--border-color);
+    border-left: 5px solid var(--primary);
+    border-radius: 8px;
+    padding: 14px 18px;
+    margin-bottom: 12px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 15px;
+    transition: all 0.2s;
+}
+
+.saved-item-card:hover {
+    border-color: var(--gold);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.saved-item-info h4 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 4px;
+}
+
+.saved-item-info p {
+    font-size: 0.92rem;
+    color: var(--text-muted);
+    margin: 2px 0;
+}
+
+.saved-item-actions {
+    display: flex;
+    gap: 8px;
+    flex-shrink: 0;
+}
+
+.btn-open {
+    background: var(--primary);
+    color: white;
+    border: none;
+    padding: 7px 15px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-open:hover {
+    background: var(--primary-light);
+    transform: translateY(-1px);
+}
+
+.btn-delete {
+    background: #FFF0F0;
+    color: #C5221F;
+    border: 1px solid #FFCDD2;
+    padding: 7px 13px;
+    border-radius: 6px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.btn-delete:hover {
+    background: #C5221F;
+    color: white;
+}
+
+.no-saved-msg {
+    text-align: center;
+    padding: 30px 10px;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+}
+
+/* Save Banner in Kundali summary */
+.save-banner {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 18px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.save-banner-unsaved {
+    background: #FFF8E7;
+    border: 1.5px solid #E0A800;
+}
+
+.save-banner-saved {
+    background: #E8F5E9;
+    border: 1.5px solid #2E7D32;
+}
+
+.btn-save-action {
+    background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+    color: #FFFFFF;
+    border: 1px solid #4CAF50;
+    padding: 8px 18px;
+    border-radius: 6px;
+    font-weight: 700;
+    cursor: pointer;
+    font-size: 0.98rem;
+    box-shadow: 0 2px 6px rgba(46, 125, 50, 0.25);
+    transition: all 0.2s;
+}
+
+.btn-save-action:hover {
+    filter: brightness(1.1);
+    transform: translateY(-1px);
+}
+
+.btn-save-primary {
+    background: linear-gradient(135deg, #15803d 0%, #166534 100%);
+    color: #FFFFFF;
+    border: 1.5px solid #16a34a;
+    padding: 9px 18px;
+    border-radius: 9px;
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+    box-shadow: 0 2px 5px rgba(21, 128, 61, 0.25);
+    transition: all 0.2s;
+}
+
+.btn-save-primary:hover {
+    background: linear-gradient(135deg, #16a34a 0%, #15803d 100%);
+    box-shadow: 0 4px 10px rgba(21, 128, 61, 0.35);
+    transform: translateY(-1px);
+}
+
+.btn-save-primary:active {
+    transform: translateY(0);
+}
+
+/* ====================================================
+ * फलादेश (Astrological Predictions / Phaladesh) Styles
+ * ==================================================== */
+
+.phaladesh-header-bar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #FFFDF9;
+    padding: 16px 20px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 12px;
+}
+
+.phaladesh-native-summary-card {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 12px;
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFF3D6 100%);
+    border: 1.5px solid var(--gold);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(16, 26, 51, 0.05);
+}
+
+.native-summary-col {
+    font-size: 0.94rem;
+    color: #333333;
+}
+
+.val-gold {
+    color: var(--primary);
+    font-weight: 700;
+}
+
+.phaladesh-filter-bar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 24px;
+    padding: 10px 14px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    justify-content: center;
+}
+
+.phal-filter-btn {
+    padding: 6px 14px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--primary);
+    background: #FFF8E7;
+    border: 1px solid var(--gold);
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.phal-filter-btn:hover,
+.phal-filter-btn.active {
+    background: var(--primary);
+    color: #FFFFFF;
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+.phaladesh-section {
+    margin-bottom: 30px;
+    scroll-margin-top: 80px;
+}
+
+.phaladesh-sec-title {
+    font-size: 1.3rem;
+    color: var(--primary);
+    border-bottom: 2px solid var(--gold-light);
+    padding-bottom: 8px;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.phaladesh-card {
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+    transition: all 0.2s ease;
+}
+
+.phaladesh-card:hover {
+    box-shadow: 0 4px 14px rgba(139, 0, 0, 0.08);
+}
+
+.bhavasta-card {
+    border-left: 4px solid var(--primary);
+}
+
+.phaladesh-card-header {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    border-bottom: 1px solid #F0E6D2;
+    padding-bottom: 10px;
+    margin-bottom: 12px;
+}
+
+.phaladesh-badge-icon {
+    font-size: 1.8rem;
+    line-height: 1;
+}
+
+.phaladesh-card-title {
+    font-size: 1.15rem;
+    color: var(--primary);
+    margin: 0 0 3px 0;
+    font-weight: 700;
+}
+
+.phaladesh-card-sub {
+    font-size: 0.88rem;
+    color: var(--text-muted);
+}
+
+.phaladesh-card-body p {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin-bottom: 10px;
+    color: #2D3748;
+}
+
+.phaladesh-main-text {
+    font-size: 1rem !important;
+    color: #1A202C !important;
+}
+
+.phaladesh-pros-cons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+    margin: 12px 0;
+}
+
+@media (max-width: 640px) {
+    .phaladesh-pros-cons-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+.phaladesh-pros {
+    background: #F1F8E9;
+    border-left: 3px solid #4CAF50;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #2E7D32;
+    line-height: 1.5;
+}
+
+.phaladesh-cons {
+    background: #FFF8E1;
+    border-left: 3px solid #FFA000;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.9rem;
+    color: #795548;
+    line-height: 1.5;
+}
+
+.pro-tag {
+    font-weight: 700;
+    color: #1B5E20;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.con-tag {
+    font-weight: 700;
+    color: #8D6E63;
+    display: block;
+    margin-bottom: 3px;
+}
+
+.phaladesh-shloka-box {
+    background: #FFFDF7;
+    border: 1px dashed var(--gold);
+    border-radius: 6px;
+    padding: 10px 14px;
+    margin-top: 12px;
+}
+
+.shloka-source {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: #8B0000;
+    margin-bottom: 4px;
+    letter-spacing: 0.5px;
+}
+
+.shloka-preeti-text {
+    font-family: 'Preeti', 'PCS Nepali', 'Kantipur', serif;
+    font-size: 1.15rem;
+    line-height: 1.45;
+    color: #4A154B;
+    white-space: pre-line;
+}
+
+.phaladesh-lucky-box,
+.phaladesh-remedy-box {
+    background: #FFF8E7;
+    border: 1px solid #E0A800;
+    border-radius: 6px;
+    padding: 10px 14px;
+    font-size: 0.92rem;
+    color: #6D4C41;
+    margin-top: 10px;
+}
+
+.lucky-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 10px;
+    font-size: 0.92rem;
+    margin-bottom: 12px;
+}
+
+.phaladesh-mantra-highlight {
+    background: #FFF3E0;
+    border-left: 3px solid #E65100;
+    padding: 10px 14px;
+    border-radius: 0 6px 6px 0;
+    font-size: 0.95rem;
+    color: #BF360C;
+    font-weight: 600;
+}
+
+.phaladesh-bhavasta-grid,
+.phaladesh-cards-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+/* Callout banner at end of kundali tab */
+.phaladesh-callout-banner {
+    background: linear-gradient(135deg, #FFF8E7 0%, #FFEFC4 100%);
+    border: 2px solid var(--primary);
+    border-radius: 10px;
+    padding: 20px 24px;
+    margin-top: 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 16px;
+    box-shadow: 0 4px 12px rgba(139, 0, 0, 0.08);
+}
+
+.callout-titles h3 {
+    color: var(--primary);
+    font-size: 1.35rem;
+    margin: 0 0 4px 0;
+}
+
+.callout-titles p {
+    color: #4A5568;
+    font-size: 0.95rem;
+    margin: 0;
+}
+
+@media print {
+    .phaladesh-header-bar,
+    .phaladesh-filter-bar,
+    .phaladesh-callout-banner {
+        display: none !important;
+    }
+    .phaladesh-section {
+        display: block !important;
+        page-break-inside: avoid;
+    }
+}
+
+/* ====================================================
+   पञ्चधा ग्रहमैत्री चक्रम् (Panchadha Maitri Chakra) Styles
+   ==================================================== */
+.panchadha-table-wrapper {
+    width: 100%;
+    margin: 4px 0 10px 0;
+}
+
+.pm-title-header {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.pm-chakra-title {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #111827;
+    border-bottom: 1.5px solid #222222;
+    padding-bottom: 2px;
+    display: inline-block;
+    letter-spacing: 0.3px;
+}
+
+.pm-table-scroll {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+}
+
+.panchadha-master-table {
+    width: 100%;
+    border-collapse: collapse;
+    border: 1.5px solid #222222;
+    background: #ffffff;
+    font-family: 'Mukta', 'Noto Sans Devanagari', sans-serif;
+}
+
+.panchadha-master-table th,
+.panchadha-master-table td {
+    border: 1px solid #222222;
+    padding: 3px 4px;
+    vertical-align: middle;
+    text-align: center;
+}
+
+.panchadha-master-table thead tr th {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111827;
+    background-color: #f8fafc;
+    text-align: center;
+    white-space: nowrap;
+    padding: 5px 4px;
+}
+
+.pm-corner-th {
+    width: 85px;
+    min-width: 75px;
+    background-color: #f1f5f9 !important;
+    text-align: center;
+    font-size: 0.92rem;
+}
+
+.pm-planet-th {
+    min-width: 48px;
+    text-align: center;
+}
+
+.pm-rel-label {
+    font-family: 'Noto Sans Devanagari', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: #111827;
+    background-color: #f8fafc;
+    white-space: nowrap;
+    width: 85px;
+    min-width: 75px;
+    text-align: center;
+    padding: 4px 6px;
+}
+
+.pm-planet-cell {
+    min-width: 48px;
+    padding: 3px 4px;
+    text-align: center;
+    vertical-align: middle;
+    background-color: #ffffff;
+}
+
+.pm-cell-items {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 2px 4px;
+    min-height: 20px;
+}
+
+.pm-planet-item {
+    font-size: 0.92rem;
+    font-weight: 600;
+    line-height: 1.2;
+    color: #1f2937;
+    white-space: nowrap;
+    cursor: default;
+    display: inline-block;
+}
+
+/* Badge classes kept for backward-compatibility */
+.badge-adhimitra { background-color: #D1FAE5; color: #065F46; border: 1px solid #10B981; }
+.badge-mitra { background-color: #ECFDF5; color: #047857; border: 1px solid #6EE7B7; }
+.badge-sama { background-color: #F1F5F9; color: #334155; border: 1px solid #CBD5E1; }
+.badge-shatru { background-color: #FFF7ED; color: #C2410C; border: 1px solid #FDBA74; }
+.badge-adhishatru { background-color: #FEF2F2; color: #991B1B; border: 1px solid #F87171; }
+.badge-self { background-color: #F1F5F9; color: #94A3B8; border: 1px dashed #CBD5E1; }
+.text-adhimitra { color: #065F46; }
+.text-mitra { color: #047857; }
+.text-sama { color: #475569; }
+.text-shatru { color: #C2410C; }
+.text-adhishatru { color: #991B1B; }
+
+@media print {
+    .panchadha-master-table {
+        border: 1.5px solid #000000 !important;
+        page-break-inside: avoid;
+    }
+    .panchadha-master-table th,
+    .panchadha-master-table td {
+        border: 1px solid #000000 !important;
+        color: #000000 !important;
+        background: #ffffff !important;
+    }
+}
+
+/* ====================================================
+   विंशोत्तरी महादशा, अन्तर्दशा र प्रत्यन्तर्दशा Styles
+   ==================================================== */
+.dasha-active-highlight-card {
+    background: linear-gradient(135deg, #FEF9C3 0%, #FFFBEB 50%, #FEF3C7 100%);
+    border: 2px solid #D97706;
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin-bottom: 16px;
+    box-shadow: 0 4px 12px rgba(217, 119, 6, 0.12);
+}
+
+.dasha-active-badge-top {
+    font-size: 0.88rem;
+    font-weight: 700;
+    color: #92400E;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 10px;
+}
+
+.dasha-current-flow {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-bottom: 8px;
+}
+
+.flow-step {
+    background: #FFFFFF;
+    border: 1px solid #F59E0B;
+    border-radius: 8px;
+    padding: 6px 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.04);
+}
+
+.flow-step .step-label {
+    font-size: 0.72rem;
+    color: #78350F;
+    font-weight: 600;
+}
+
+.flow-step .step-name {
+    font-size: 1.1rem;
+    color: #8B0000;
+    font-weight: 700;
+}
+
+.flow-arrow {
+    font-size: 1.3rem;
+    color: #D97706;
+    font-weight: 700;
+}
+
+.dasha-current-date-info {
+    font-size: 0.88rem;
+    color: #78350F;
+    margin-top: 4px;
+}
+
+.dasha-toolbar {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 15px;
+    align-items: center;
+}
+
+.btn-dasha-tool {
+    background: #FFFFFF;
+    border: 1px solid #D1D5DB;
+    color: #374151;
+    padding: 7px 14px;
+    border-radius: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-dasha-tool:hover {
+    background: #F3F4F6;
+    border-color: #9CA3AF;
+}
+
+.btn-tool-active {
+    background: var(--primary) !important;
+    color: #FFFFFF !important;
+    border-color: var(--primary) !important;
+}
+
+.btn-tool-active:hover {
+    background: #6D0000 !important;
+}
+
+.dasha-main-table {
+    width: 100%;
+}
+
+.btn-toggle-maha,
+.btn-toggle-ant {
+    background: transparent;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: #4B5563;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-maha:hover,
+.btn-toggle-ant:hover {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+}
+
+.toggle-icon {
+    display: inline-block;
+    transition: transform 0.2s ease;
+}
+
+.toggle-icon.open {
+    color: var(--primary);
+    font-weight: bold;
+}
+
+.dasha-lord-title {
+    font-size: 1rem;
+    color: #1F2937;
+}
+
+.maha-row {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.maha-row:hover {
+    background-color: #FFF8E7 !important;
+}
+
+.row-maha-active {
+    background-color: #FEF9C3 !important;
+    font-weight: 600;
+}
+
+.row-maha-birth {
+    background-color: #FFFDF7;
+}
+
+.ant-row {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.ant-row:hover {
+    background-color: #FEF3C7 !important;
+}
+
+.row-ant-active {
+    background-color: #FEF08A !important;
+    font-weight: 600;
+}
+
+.row-prat-active {
+    background-color: #FDE047 !important;
+    font-weight: 600;
+}
+
+.badge-pulse-active {
+    display: inline-block;
+    margin-left: 6px;
+    background: #059669;
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 700;
+    padding: 2px 7px;
+    border-radius: 10px;
+    animation: pulse-glow 2s infinite;
+}
+
+.badge-pulse-active-sm {
+    display: inline-block;
+    margin-left: 6px;
+    background: #059669;
+    color: #fff;
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1px 6px;
+    border-radius: 8px;
+}
+
+@keyframes pulse-glow {
+    0% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0.5); }
+    70% { box-shadow: 0 0 0 6px rgba(5, 150, 105, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(5, 150, 105, 0); }
+}
+
+.badge-dasha {
+    display: inline-block;
+    padding: 3px 8px;
+    border-radius: 12px;
+    font-size: 0.78rem;
+    font-weight: 600;
+}
+
+.badge-dasha-active {
+    background: #D1FAE5;
+    color: #065F46;
+    border: 1px solid #10B981;
+}
+
+.badge-dasha-past {
+    background: #F1F5F9;
+    color: #64748B;
+    border: 1px solid #CBD5E1;
+}
+
+.badge-dasha-future {
+    background: #EFF6FF;
+    color: #1D4ED8;
+    border: 1px solid #BFDBFE;
+}
+
+.dasha-nested-cell {
+    padding: 12px 14px !important;
+    background: #FAFAF9;
+    border-left: 4px solid var(--primary) !important;
+}
+
+.pratyant-nested-cell {
+    background: #F5F5F4;
+    border-left: 4px solid #D97706 !important;
+    padding: 10px 12px !important;
+}
+
+.nested-header h5 {
+    margin: 0 0 10px 0;
+    font-size: 0.98rem;
+    color: var(--primary);
+}
+
+.nested-header-prat h6 {
+    margin: 0 0 8px 0;
+    font-size: 0.9rem;
+    color: #92400E;
+}
+
+.dasha-sub-table,
+.dasha-sub-sub-table {
+    margin: 0;
+    background: #FFFFFF;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+}
+
+.dasha-sub-table th,
+.dasha-sub-sub-table th {
+    background: #F3F4F6 !important;
+    font-size: 0.84rem;
+}
+
+.dasha-sub-table td,
+.dasha-sub-sub-table td {
+    font-size: 0.86rem;
+    padding: 6px 10px;
+}
+
+/* ====================================================
+   दशा प्रणाली चयन (विंशोत्तरी / योगिनी / त्रिभागी)
+   ==================================================== */
+#kundaliDashaCard {
+    text-align: center;
+}
+
+#kundaliDashaCard > #dashaContainer {
+    width: 100%;
+    margin: 0 auto;
+}
+
+.dasha-system-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 0 auto 24px auto;
+    background: #F3F4F6;
+    padding: 6px;
+    border-radius: 12px;
+    border: 1px solid #E5E7EB;
+    flex-wrap: wrap;
+    max-width: 760px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dasha-sys-btn {
+    flex: 1 1 210px;
+    max-width: 260px;
+    padding: 10px 16px;
+    border: none;
+    background: transparent;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #4B5563;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.dasha-sys-btn:hover {
+    background: #E5E7EB;
+    color: #111827;
+}
+
+.dasha-sys-btn.active {
+    background: var(--primary) !important;
+    color: #FFFFFF !important;
+    box-shadow: 0 3px 8px rgba(139, 0, 0, 0.25);
+}
+
+.dasha-system-panel {
+    display: none;
+    width: 100%;
+}
+
+.dasha-system-panel.active {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    animation: dashaFadeIn 0.22s ease-in-out;
+}
+
+@keyframes dashaFadeIn {
+    from { opacity: 0; transform: translateY(4px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.yogini-row,
+.tribhagi-row {
+    cursor: pointer;
+    user-select: none;
+    transition: background-color 0.15s ease;
+}
+
+.yogini-row:hover {
+    background-color: #FFF1F2 !important;
+}
+
+.tribhagi-row:hover {
+    background-color: #F5F3FF !important;
+}
+
+.btn-toggle-yogini,
+.btn-toggle-tribhagi {
+    background: transparent;
+    border: 1px solid #D1D5DB;
+    border-radius: 4px;
+    width: 26px;
+    height: 26px;
+    padding: 0;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-size: 0.75rem;
+    color: #4B5563;
+    transition: all 0.2s ease;
+}
+
+.btn-toggle-yogini:hover {
+    background: #E11D48;
+    color: #fff;
+    border-color: #E11D48;
+}
+
+.btn-toggle-tribhagi:hover {
+    background: #7C3AED;
+    color: #fff;
+    border-color: #7C3AED;
+}
+
+/* ====================================================
+   Dasha Traditional Sheet & Side-by-Side Pratyantar Layout
+   (As per Kundali Darsan Reference)
+   ==================================================== */
+
+.dasha-sheet-wrapper {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 24px 20px;
+    margin: 0 auto;
+    max-width: 1140px;
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.dasha-sheet-header {
+    text-align: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.dasha-sheet-title {
+    font-family: 'Mukta', sans-serif;
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #4A3E00; /* olive-gold */
+    margin: 0 0 6px 0;
+    letter-spacing: 0.5px;
+}
+
+.dasha-sheet-subtitle {
+    font-family: 'Mukta', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 700;
+    color: #0275d8; /* blue */
+    margin: 0;
+}
+
+.dasha-cycle-selector {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    margin: 14px auto 20px auto;
+}
+
+.dasha-cycle-btn {
+    background: #F3F4F6;
+    border: 1px solid #D1D5DB;
+    padding: 5px 14px;
+    border-radius: 20px;
+    font-size: 0.88rem;
+    font-weight: 700;
+    cursor: pointer;
+    color: #4B5563;
+    transition: all 0.15s ease;
+}
+
+.dasha-cycle-btn.active {
+    background: #8B1113;
+    color: #FFFFFF;
+    border-color: #8B1113;
+}
+
+/* Two-column layout: Left is grid, Right is Pratyantar side panel */
+.dasha-two-col-layout {
+    display: flex;
+    gap: 28px;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 1080px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.dasha-grid-container {
+    flex: 0 1 740px;
+    max-width: 760px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+.dasha-3col-grid {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(200px, 1fr));
+    gap: 20px 22px;
+    justify-content: center;
+    justify-items: center;
+    width: 100%;
+}
+
+/* Each Mahadasha Block */
+.dasha-block {
+    background: #FFFFFF;
+    border-bottom: 2px solid #8A7320;
+    padding-bottom: 6px;
+    user-select: none;
+    width: 100%;
+    max-width: 245px;
+    margin: 0 auto;
+    box-sizing: border-box;
+}
+
+.dasha-block-header {
+    background-color: #FFFFD0;
+    border-top: 1.5px solid #8A7320;
+    border-bottom: 1.5px solid #8A7320;
+    padding: 5px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 6px;
+}
+
+.dasha-block-lord {
+    font-family: 'Mukta', sans-serif;
+    font-size: 1.08rem;
+    font-weight: 800;
+    color: #0275d8;
+}
+
+.dasha-block-date {
+    font-family: 'Mukta', sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    color: #0275d8;
+}
+
+.dasha-block-body {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.dasha-ant-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 3px 8px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.dasha-ant-row:hover {
+    background-color: #FEF3C7;
+    color: #92400E;
+}
+
+.dasha-ant-row.selected {
+    background-color: #FDE68A !important;
+    outline: 1.5px solid #D97706;
+}
+
+.dasha-ant-row.current-active {
+    background-color: #ECFDF5;
+    border-left: 3px solid #10B981;
+}
+
+.dasha-ant-row.selected.current-active {
+    background-color: #FDE68A !important;
+    border-left: 3px solid #D97706;
+}
+
+.dasha-ant-name {
+    font-family: 'Mukta', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #20130B;
+}
+
+.dasha-ant-date {
+    font-family: 'Mukta', sans-serif;
+    font-size: 0.98rem;
+    font-weight: 700;
+    color: #991B1B;
+    text-align: right;
+    min-width: 84px;
+}
+
+.dasha-ant-date.dash-date {
+    color: #991B1B;
+    padding-right: 18px;
+    text-align: right;
+}
+
+/* Side Card Section for Pratyantardasha */
+.dasha-side-panel-wrapper {
+    width: 290px;
+    flex-shrink: 0;
+    position: sticky;
+    top: 20px;
+    text-align: left;
+}
+
+.dasha-side-card {
+    background: #FFFDF9;
+    border: 1.5px solid #E5E7EB;
+    border-radius: 8px;
+    padding: 16px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.06);
+}
+
+.dasha-side-header-info {
+    text-align: center;
+    margin-bottom: 12px;
+    padding-bottom: 10px;
+    border-bottom: 1px dashed #CBD5E1;
+}
+
+.dasha-side-header-info h4 {
+    margin: 0 0 4px 0;
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: #8B1113;
+}
+
+.dasha-side-header-info p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #64748B;
+}
+
+.dasha-side-hint {
+    margin: 12px 0 0 0;
+    font-size: 0.82rem;
+    color: #6B7280;
+    line-height: 1.4;
+    text-align: center;
+    background: #F9FAFB;
+    padding: 6px 10px;
+    border-radius: 6px;
+}
+
+/* Responsive adjustments */
+@media (max-width: 1050px) {
+    .dasha-two-col-layout {
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    .dasha-grid-container {
+        max-width: 740px;
+        margin: 0 auto;
+    }
+    .dasha-side-panel-wrapper {
+        width: 100%;
+        max-width: 480px;
+        position: static;
+        margin: 24px auto 0 auto;
+    }
+    .dasha-3col-grid {
+        grid-template-columns: repeat(3, 1fr);
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    .dasha-3col-grid {
+        grid-template-columns: minmax(240px, 320px);
+        justify-content: center;
+    }
+    .dasha-side-panel-wrapper {
+        max-width: 320px;
+    }
+}
+
+/* ====================================================
+   Dasha Phaladesh Sections (Vimshottari, Yogini, Tribhagi)
+   ==================================================== */
+
+.dasha-phaladesh-container {
+    margin-top: 32px;
+    padding-top: 24px;
+    border-top: 2px dashed #E5E7EB;
+    max-width: 1040px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: left;
+}
+
+.dasha-phaladesh-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.dasha-phal-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 20px;
+    background: #FEF3C7;
+    color: #92400E;
+    border: 1px solid #FCD34D;
+    margin-bottom: 8px;
+    letter-spacing: 0.5px;
+}
+
+.dasha-phal-title {
+    font-size: 1.45rem;
+    font-weight: 700;
+    color: #1F2937;
+    margin: 4px 0 6px 0;
+}
+
+.dasha-phal-subtitle {
+    font-size: 0.92rem;
+    color: #6B7280;
+    max-width: 680px;
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+/* Active Highlight Card */
+.dasha-active-phal-card {
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border: 2px solid #F59E0B;
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 14px rgba(217, 119, 6, 0.12);
+    position: relative;
+    overflow: hidden;
+}
+
+.active-phal-top {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.active-phal-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 4px 12px;
+    font-size: 0.78rem;
+    font-weight: 700;
+    border-radius: 14px;
+    background: #F59E0B;
+    color: #FFFFFF;
+}
+
+.active-phal-heading {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #92400E;
+    margin: 0;
+}
+
+.active-phal-content {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.phal-block {
+    background: #FFFFFF;
+    border-radius: 8px;
+    padding: 14px 16px;
+    border: 1px solid #E5E7EB;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.03);
+}
+
+.phal-block h5 {
+    font-size: 0.98rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+    color: #1F2937;
+}
+
+.phal-block p {
+    font-size: 0.92rem;
+    line-height: 1.6;
+    color: #374151;
+    margin: 0;
+}
+
+.phal-block-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
+}
+
+@media (max-width: 768px) {
+    .phal-block-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.phal-sub-col {
+    padding: 14px 16px;
+    border-radius: 8px;
+    font-size: 0.92rem;
+    line-height: 1.55;
+}
+
+.phal-sub-col h6 {
+    font-size: 0.95rem;
+    font-weight: 700;
+    margin: 0 0 6px 0;
+}
+
+.phal-sub-col p {
+    margin: 0;
+}
+
+.col-favorable {
+    background: #ECFDF5;
+    border: 1px solid #A7F3D0;
+    color: #065F46;
+}
+
+.col-favorable h6 {
+    color: #047857;
+}
+
+.col-unfavorable {
+    background: #FFFBEB;
+    border: 1px solid #FDE68A;
+    color: #92400E;
+}
+
+.col-unfavorable h6 {
+    color: #B45309;
+}
+
+.phal-block-antar {
+    background: #F0FDF4;
+    border: 1px solid #BBF7D0;
+}
+
+.phal-block-antar h5 {
+    color: #166534;
+}
+
+.phal-block-remedy {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    border-left: 4px solid #3B82F6;
+}
+
+.phal-block-remedy h5 {
+    color: #1E40AF;
+}
+
+/* Shloka highlight box for Yogini */
+.yogini-highlight-shloka {
+    font-family: var(--font-sanskrit);
+    background: #FFF1F2;
+    border-left: 4px solid #E11D48;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 1.05rem;
+    color: #881337;
+    font-weight: 600;
+    text-align: center;
+    letter-spacing: 0.3px;
+    line-height: 1.55;
+}
+
+.yogini-shloka-quote {
+    font-family: var(--font-sanskrit);
+    font-size: 0.90rem;
+    color: #9F1239;
+    background: #FFF1F2;
+    padding: 6px 8px;
+    border-radius: 4px;
+    margin-bottom: 8px;
+    line-height: 1.45;
+}
+
+/* Theme variations */
+.title-rose { color: #BE123C; }
+.badge-rose {
+    background: #FFE4E6 !important;
+    color: #BE123C !important;
+    border: 1px solid #FDA4AF !important;
+}
+.text-rose { color: #BE123C !important; }
+.card-active-rose {
+    background: linear-gradient(135deg, #FFF1F2 0%, #FFFBEB 100%) !important;
+    border-color: #E11D48 !important;
+    box-shadow: 0 4px 14px rgba(225, 29, 72, 0.12) !important;
+}
+.remedy-rose-block {
+    background: #FFF1F2 !important;
+    border-color: #FECDD3 !important;
+    border-left: 4px solid #E11D48 !important;
+}
+.remedy-rose-block h5 { color: #9F1239 !important; }
+
+.title-purple { color: #6D28D9; }
+.badge-purple {
+    background: #EDE9FE !important;
+    color: #6D28D9 !important;
+    border: 1px solid #C4B5FD !important;
+}
+.text-purple { color: #6D28D9 !important; }
+.card-active-purple {
+    background: linear-gradient(135deg, #F5F3FF 0%, #FFFBEB 100%) !important;
+    border-color: #7C3AED !important;
+    box-shadow: 0 4px 14px rgba(124, 58, 237, 0.12) !important;
+}
+.remedy-purple-block {
+    background: #F5F3FF !important;
+    border-color: #DDD6FE !important;
+    border-left: 4px solid #7C3AED !important;
+}
+.remedy-purple-block h5 { color: #5B21B6 !important; }
+
+/* Grid of All Dashas */
+.dasha-all-section {
+    margin-top: 24px;
+}
+
+.dasha-all-section-title {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1F2937;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.dasha-all-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.dasha-grid-card {
+    background: #FFFFFF;
+    border: 1px solid #E5E7EB;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.04);
+    display: flex;
+    flex-direction: column;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.dasha-grid-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 14px rgba(0, 0, 0, 0.08);
+}
+
+.card-current-active {
+    border: 2px solid #D97706 !important;
+    box-shadow: 0 0 0 3px rgba(217, 119, 6, 0.15), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card-current-active-yogini {
+    border: 2px solid #E11D48 !important;
+    box-shadow: 0 0 0 3px rgba(225, 29, 72, 0.15), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.card-current-active-tribhagi {
+    border: 2px solid #7C3AED !important;
+    box-shadow: 0 0 0 3px rgba(124, 58, 237, 0.15), 0 4px 10px rgba(0, 0, 0, 0.06) !important;
+}
+
+.dasha-grid-card-head {
+    background: #F9FAFB;
+    padding: 10px 14px;
+    border-bottom: 1px solid #E5E7EB;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.head-yogini {
+    background: #FFF1F2;
+    border-color: #FECDD3;
+}
+
+.head-tribhagi {
+    background: #F5F3FF;
+    border-color: #DDD6FE;
+}
+
+.card-planet-title {
+    font-weight: 700;
+    font-size: 0.96rem;
+    color: #1F2937;
+}
+
+.card-years-badge {
+    font-size: 0.75rem;
+    padding: 2px 8px;
+    border-radius: 12px;
+    background: #FEF3C7;
+    color: #92400E;
+    font-weight: 600;
+}
+
+.dasha-grid-card-body {
+    padding: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    flex-grow: 1;
+}
+
+.phal-text {
+    font-size: 0.88rem;
+    line-height: 1.5;
+    margin: 0;
+    color: #374151;
+}
+
+.phal-text strong {
+    color: #1F2937;
+}
+
+.phal-text.text-green {
+    color: #047857;
+}
+
+.phal-text.text-green strong {
+    color: #065F46;
+}
+
+.phal-text.text-orange {
+    color: #B45309;
+}
+
+.phal-text.text-orange strong {
+    color: #92400E;
+}
+
+.phal-remedy-box {
+    margin-top: auto;
+    padding: 8px 10px;
+    border-radius: 6px;
+    background: #EFF6FF;
+    border-left: 3px solid #3B82F6;
+    font-size: 0.82rem;
+    line-height: 1.45;
+    color: #1E3A8A;
+}
+
+.phal-remedy-box.remedy-rose {
+    background: #FFF1F2;
+    border-left-color: #E11D48;
+    color: #881337;
+}
+
+.phal-remedy-box.remedy-purple {
+    background: #F5F3FF;
+    border-left-color: #7C3AED;
+    color: #4C1D95;
+}
+
+/* ====================================================
+   वार्षिक चाडपर्व, राष्ट्रिय सार्वजनिक विदा तथा दिवसहरू (Parva & Holidays Tab)
+   ==================================================== */
+
+/* Shortcut button in Panchang Header */
+.btn-parva-shortcut {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%);
+    border: 1.5px solid #F59E0B;
+    color: #92400E;
+    font-family: var(--font-heading);
+    font-size: 0.88rem;
+    font-weight: 700;
+    padding: 7px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(245, 158, 11, 0.15);
+    transition: all 0.25s ease;
+    white-space: nowrap;
+}
+
+.btn-parva-shortcut:hover {
+    background: linear-gradient(135deg, #FDE68A 0%, #F59E0B 100%);
+    color: #78350F;
+    border-color: #D97706;
+    box-shadow: 0 4px 12px rgba(245, 158, 11, 0.28);
+    transform: translateY(-1.5px);
+}
+
+/* Today Parva Alert in Panchang Photo Card */
+.panchang-parva-alert-pill {
+    margin: 8px 12px 14px;
+    background: linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%);
+    border: 1.5px solid #F97316;
+    border-radius: 8px;
+    padding: 6px 14px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(249, 115, 22, 0.15);
+    transition: all 0.2s ease;
+}
+
+.panchang-parva-alert-pill:hover {
+    transform: scale(1.015);
+    box-shadow: 0 4px 14px rgba(249, 115, 22, 0.25);
+    border-color: #EA580C;
+}
+
+.today-parva-badge-inner {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    font-size: 0.9rem;
+}
+
+.today-parva-badge-inner .parva-holiday-tag {
+    background: #DC2626;
+    color: #FFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+    box-shadow: 0 1px 4px rgba(220, 38, 38, 0.3);
+}
+
+.today-parva-badge-inner .parva-festival-tag {
+    background: #D97706;
+    color: #FFF;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 2px 8px;
+    border-radius: 12px;
+    letter-spacing: 0.3px;
+}
+
+.today-parva-badge-inner .today-parva-name {
+    color: #9A3412;
+    font-family: var(--font-heading);
+    font-weight: 800;
+    font-size: 0.95rem;
+}
+
+.today-parva-badge-inner .today-parva-sub {
+    color: #C2410C;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+/* Parva Header Banner */
+.parva-header-banner {
+    background: radial-gradient(circle at 85% 20%, rgba(217, 119, 6, 0.18) 0%, transparent 60%),
+                linear-gradient(135deg, #101A33 0%, #1A284A 55%, #2A173B 100%);
+    border-radius: var(--radius);
+    padding: 28px 24px 24px;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    box-shadow: 0 8px 24px rgba(16, 26, 51, 0.18);
+    border: 1px solid rgba(198, 164, 92, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.parva-header-banner::before {
+    content: "🚩";
+    position: absolute;
+    right: 20px;
+    bottom: -15px;
+    font-size: 110px;
+    opacity: 0.08;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.parva-banner-badge {
+    display: inline-block;
+    background: rgba(198, 164, 92, 0.2);
+    border: 1px solid rgba(198, 164, 92, 0.45);
+    color: #F7E5B5;
+    font-size: 0.78rem;
+    font-weight: 700;
+    padding: 4px 12px;
+    border-radius: 14px;
+    margin-bottom: 10px;
+    letter-spacing: 0.3px;
+}
+
+.parva-banner-title {
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    margin-bottom: 8px;
+    line-height: 1.35;
+}
+
+.parva-banner-desc {
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: #CBD5E1;
+    max-width: 780px;
+    margin-bottom: 18px;
+    line-height: 1.5;
+}
+
+.parva-stats-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 14px;
+}
+
+.parva-stat-card {
+    background: rgba(255, 255, 255, 0.09);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    backdrop-filter: blur(6px);
+    border-radius: 8px;
+    padding: 8px 18px;
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+}
+
+.parva-stat-card.stat-holiday {
+    background: rgba(239, 68, 68, 0.16);
+    border-color: rgba(239, 68, 68, 0.35);
+}
+
+.parva-stat-card.stat-festival {
+    background: rgba(245, 158, 11, 0.16);
+    border-color: rgba(245, 158, 11, 0.35);
+}
+
+.parva-stat-num {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 900;
+    color: #F8FAFC;
+}
+
+.parva-stat-card.stat-holiday .parva-stat-num {
+    color: #FCA5A5;
+}
+
+.parva-stat-card.stat-festival .parva-stat-num {
+    color: #FDE68A;
+}
+
+.parva-stat-label {
+    font-size: 0.8rem;
+    font-weight: 600;
+    color: #E2E8F0;
+}
+
+/* Controls Card */
+.parva-controls-card {
+    padding: 18px 20px;
+    margin-bottom: 24px;
+    background: #FFFFFF;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+}
+
+.parva-controls-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.parva-search-wrapper {
+    position: relative;
+    flex: 1 1 300px;
+    display: flex;
+    align-items: center;
+}
+
+.parva-search-icon {
+    position: absolute;
+    left: 12px;
+    color: #94A3B8;
+    pointer-events: none;
+}
+
+.parva-search-input {
+    width: 100%;
+    padding: 9px 36px 9px 38px;
+    border: 1.5px solid #CBD5E1;
+    border-radius: 8px;
+    font-family: var(--font-body);
+    font-size: 0.92rem;
+    color: var(--text-dark);
+    background: #F8FAFC;
+    transition: all 0.2s ease;
+}
+
+.parva-search-input:focus {
+    outline: none;
+    border-color: #3B82F6;
+    background: #FFFFFF;
+    box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
+}
+
+.parva-search-clear {
+    position: absolute;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    color: #94A3B8;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0 4px;
+}
+
+.parva-search-clear:hover {
+    color: #475569;
+}
+
+.parva-cat-filters {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.parva-cat-btn {
+    background: #F1F5F9;
+    border: 1px solid #CBD5E1;
+    color: #475569;
+    font-family: var(--font-body);
+    font-size: 0.82rem;
+    font-weight: 700;
+    padding: 6px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.parva-cat-btn:hover {
+    background: #E2E8F0;
+    color: #1E293B;
+}
+
+.parva-cat-btn.active {
+    background: #1E293B;
+    border-color: #0F172A;
+    color: #FFFFFF;
+    box-shadow: 0 2px 6px rgba(15, 23, 42, 0.2);
+}
+
+.parva-cat-btn.holiday-btn.active {
+    background: #DC2626;
+    border-color: #B91C1C;
+    color: #FFFFFF;
+    box-shadow: 0 2px 8px rgba(220, 38, 38, 0.28);
+}
+
+/* 12 Months Selector */
+.parva-month-bar {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding-top: 12px;
+    border-top: 1px solid #F1F5F9;
+    flex-wrap: wrap;
+}
+
+.month-bar-label {
+    font-family: var(--font-heading);
+    font-size: 0.84rem;
+    font-weight: 700;
+    color: var(--text-muted);
+    white-space: nowrap;
+}
+
+.parva-month-btns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+    flex-grow: 1;
+}
+
+.parva-month-btn {
+    background: #F8FAFC;
+    border: 1px solid #E2E8F0;
+    color: #334155;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 5px 10px;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.18s ease;
+}
+
+.parva-month-btn:hover {
+    background: #E2E8F0;
+    border-color: #CBD5E1;
+}
+
+.parva-month-btn.active {
+    background: #C6A45C;
+    border-color: #B28F42;
+    color: #101A33;
+    font-weight: 800;
+    box-shadow: 0 2px 6px rgba(198, 164, 92, 0.35);
+}
+
+/* Parva Container & Sections */
+.parva-list-container {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.parva-month-section {
+    background: #FFFFFF;
+    border-radius: var(--radius);
+    border: 1px solid var(--border-color);
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+}
+
+.parva-month-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    margin-bottom: 16px;
+    border-bottom: 2px solid #F1F5F9;
+}
+
+.parva-month-title {
+    font-family: var(--font-heading);
+    font-size: 1.18rem;
+    font-weight: 800;
+    color: #1E293B;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0;
+}
+
+.parva-month-title .month-icon {
+    color: #C6A45C;
+    font-size: 1.1rem;
+}
+
+.parva-count-badge {
+    background: #EFF6FF;
+    border: 1px solid #BFDBFE;
+    color: #1D4ED8;
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 3px 10px;
+    border-radius: 12px;
+}
+
+/* Grid of Parva Cards */
+.parva-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 16px;
+}
+
+.parva-card {
+    background: #FAFAFA;
+    border: 1.5px solid #E2E8F0;
+    border-radius: 8px;
+    padding: 14px 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative;
+}
+
+.parva-card:hover {
+    background: #FFFFFF;
+    border-color: #CBD5E1;
+    transform: translateY(-2.5px);
+    box-shadow: 0 6px 18px rgba(16, 26, 51, 0.08);
+}
+
+/* Holiday card highlight */
+.parva-card.is-holiday {
+    background: #FEF2F2;
+    border-color: #FECACA;
+}
+
+.parva-card.is-holiday:hover {
+    background: #FFF5F5;
+    border-color: #F87171;
+    box-shadow: 0 6px 18px rgba(220, 38, 38, 0.12);
+}
+
+.parva-card-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.parva-date-badge {
+    background: #EDE9FE;
+    border: 1px solid #DDD6FE;
+    color: #6D28D9;
+    font-family: var(--font-heading);
+    font-size: 0.78rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 6px;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.parva-holiday-badge {
+    background: #DC2626;
+    color: #FFFFFF;
+    font-size: 0.7rem;
+    font-weight: 800;
+    padding: 3px 8px;
+    border-radius: 10px;
+    letter-spacing: 0.2px;
+    box-shadow: 0 1px 3px rgba(220, 38, 38, 0.25);
+    white-space: nowrap;
+}
+
+.parva-card-name {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 800;
+    color: #0F172A;
+    line-height: 1.35;
+    margin: 2px 0;
+}
+
+.parva-card.is-holiday .parva-card-name {
+    color: #991B1B;
+}
+
+.parva-card-cat-tag {
+    display: inline-block;
+    align-self: flex-start;
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #64748B;
+    background: #E2E8F0;
+    padding: 2px 7px;
+    border-radius: 4px;
+}
+
+.parva-card-cat-tag.cat-festival {
+    background: #FEF3C7;
+    color: #92400E;
+}
+
+.parva-card-cat-tag.cat-diwas {
+    background: #E0E7FF;
+    color: #3730A3;
+}
+
+.parva-card-cat-tag.cat-jayanti {
+    background: #FCE7F3;
+    color: #9D174D;
+}
+
+.parva-card-desc {
+    font-family: var(--font-body);
+    font-size: 0.85rem;
+    color: #475569;
+    line-height: 1.48;
+    margin: 0;
+    margin-top: 4px;
+}
+
+/* Empty State / Not found */
+.parva-empty-state {
+    text-align: center;
+    padding: 40px 20px;
+    color: #64748B;
+    background: #FFFFFF;
+    border-radius: var(--radius);
+    border: 1px dashed #CBD5E1;
+}
+
+.parva-empty-state .empty-icon {
+    font-size: 2.5rem;
+    margin-bottom: 12px;
+    display: block;
+}
+
+.parva-empty-state h3 {
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #334155;
+    margin-bottom: 6px;
+}
+
+.parva-empty-state p {
+    font-size: 0.88rem;
+    color: #64748B;
+}
+
+@media (max-width: 768px) {
+    .parva-header-banner {
+        padding: 20px 16px;
+    }
+    .parva-banner-title {
+        font-size: 1.3rem;
+    }
+    .parva-stats-row {
+        gap: 8px;
+    }
+    .parva-stat-card {
+        flex: 1 1 calc(50% - 8px);
+        padding: 6px 12px;
+    }
+    .parva-grid {
+        grid-template-columns: 1fr;
+    }
+    .btn-parva-shortcut {
+        font-size: 0.8rem;
+        padding: 6px 10px;
+    }
+    .parva-month-btns {
+        overflow-x: auto;
+        flex-wrap: nowrap;
+        padding-bottom: 4px;
+    }
+}
+
+/* ====================================================
+   Modern Nepali Calendar & Clock Component Styles
+   ==================================================== */
+.clock-face {
+    position: relative;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #ffffff 0%, #fcfbf9 65%, #f4f1ea 100%);
+    box-shadow: 
+        0 10px 28px -4px rgba(28, 25, 23, 0.08),
+        0 4px 10px -2px rgba(28, 25, 23, 0.04),
+        inset 0 2px 5px rgba(255, 255, 255, 0.9),
+        inset 0 -2px 6px rgba(180, 83, 9, 0.08);
+    border: 4px solid #f5efe6;
+    margin: 0 auto;
+}
+
+.clock-num {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    font-family: var(--font-chart);
+    font-weight: 700;
+    font-size: 0.9rem;
+    color: #44403c;
+    width: 22px;
+    height: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: -11px;
+    margin-top: -11px;
+}
+
+.clock-num-12 { transform: rotate(0deg) translateY(-78px) rotate(0deg); color: #881337; font-size: 1rem; }
+.clock-num-1  { transform: rotate(30deg) translateY(-78px) rotate(-30deg); }
+.clock-num-2  { transform: rotate(60deg) translateY(-78px) rotate(-60deg); }
+.clock-num-3  { transform: rotate(90deg) translateY(-78px) rotate(-90deg); color: #881337; font-size: 1rem; }
+.clock-num-4  { transform: rotate(120deg) translateY(-78px) rotate(-120deg); }
+.clock-num-5  { transform: rotate(150deg) translateY(-78px) rotate(-150deg); }
+.clock-num-6  { transform: rotate(180deg) translateY(-78px) rotate(-180deg); color: #881337; font-size: 1rem; }
+.clock-num-7  { transform: rotate(210deg) translateY(-78px) rotate(-210deg); }
+.clock-num-8  { transform: rotate(240deg) translateY(-78px) rotate(-240deg); }
+.clock-num-9  { transform: rotate(270deg) translateY(-78px) rotate(-270deg); color: #881337; font-size: 1rem; }
+.clock-num-10 { transform: rotate(300deg) translateY(-78px) rotate(-300deg); }
+.clock-num-11 { transform: rotate(330deg) translateY(-78px) rotate(-330deg); }
+
+.clock-hand {
+    position: absolute;
+    bottom: 50%;
+    left: 50%;
+    transform-origin: 50% 100%;
+    border-radius: 9999px;
+    transition: transform 0.05s cubic-bezier(0.4, 2.08, 0.55, 0.44);
+}
+
+.clock-hand.hour {
+    width: 4.5px;
+    height: 48px;
+    background: #1c1917;
+    margin-left: -2.25px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+}
+
+.clock-hand.minute {
+    width: 3px;
+    height: 68px;
+    background: #44403c;
+    margin-left: -1.5px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.15);
+}
+
+.clock-hand.second {
+    width: 1.8px;
+    height: 86px;
+    background: #881337;
+    margin-left: -0.9px;
+    bottom: calc(50% - 13px);
+    transform-origin: 50% calc(100% - 13px);
+    transition: none;
+}
+
+.clock-pivot {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 11px;
+    height: 11px;
+    background: #881337;
+    border: 2px solid #ffffff;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    z-index: 10;
+}
+
+.clock-pivot::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 3.5px;
+    height: 3.5px;
+    background: #d97706;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.cal-cell {
+    height: 40px;
+    max-height: 40px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    user-select: none;
+    transition: all 0.15s ease;
+    position: relative;
+    font-size: 0.94rem;
+    font-weight: 600;
+    border-radius: 8px;
+    margin: 1px;
+}
+
+@media (max-width: 640px) {
+    .cal-cell {
+        height: 35px;
+        max-height: 35px;
+        font-size: 0.82rem;
+    }
+}
+
+.cal-cell.is-empty {
+    cursor: default;
+    background-color: #fafaf9 !important;
+    color: #cbd5e1 !important;
+    font-weight: 400;
+}
+
+.cal-cell:hover:not(.is-empty):not(.is-active) {
+    background-color: #fef3c7;
+    color: #92400e;
+    transform: scale(1.05);
+}
+
+.cal-cell.is-holiday:not(.is-active) {
+    color: #dc2626;
+    font-weight: 700;
+}
+
+.cal-cell.is-active {
+    background: linear-gradient(135deg, #c2410c 0%, #b45309 100%) !important;
+    color: #ffffff !important;
+    border-radius: 9px;
+    box-shadow: 0 2px 6px rgba(180, 83, 9, 0.35);
+    transform: scale(1.06);
+    z-index: 2;
+}
+
+.cal-cell.is-active * {
+    color: #ffffff !important;
+    font-weight: 800;
+}
+
+/* ====================================================
+   प्रत्यक्ष डिजिटल समय (Live Digital Time Display)
+   ==================================================== */
+#clockDigitalTime,
+#liveDigitalTime {
+    font-size: 1.25rem !important;
+    line-height: 1.35;
+    letter-spacing: -0.01em;
+}
+
+#clockDigitalTime .time-main,
+#liveDigitalTime .time-main {
+    font-size: 1.25rem;
+    font-weight: 800;
+}
+
+#clockDigitalTime .time-ampm,
+#liveDigitalTime .time-ampm {
+    font-size: 0.9em;
+    font-weight: 700;
+    color: #881337;
+    margin-left: 0.35rem;
+    display: inline-block;
+    white-space: nowrap;
+}
+
+/* ====================================================
+   क्यालेन्डर मुनिका ६ वटा कार्डहरू (Calendar Bottom Cards)
+   ==================================================== */
+.cal-bottom-card {
+    border: 1px solid #d6d3d1 !important; /* स्पष्ट बोर्डर */
+    background: #ffffff;
+    box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+    transition: all 0.18s ease-in-out;
+}
+
+.cal-bottom-card:hover {
+    border-color: #b45309 !important; /* हल्का एम्बर बोर्डर होभरमा */
+    box-shadow: 0 3px 8px -1px rgba(180, 83, 9, 0.15);
+}
+
+/* ====================================================
+   सिद्धान्त छनोट स्विच बटन (Siddhanta Toggle Switch)
+   ==================================================== */
+.siddhanta-switch-container {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    padding: 3px 6px;
+    border-radius: 12px;
+    border: 1px solid #d6d3d1;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+}
+
+.siddhanta-switch-label {
+    font-size: 0.82rem;
+    font-weight: 700;
+    color: #475569;
+    padding-left: 4px;
+    user-select: none;
+}
+
+.siddhanta-segmented-control {
+    display: inline-flex;
+    align-items: center;
+    background: #f1f5f9;
+    padding: 3px;
+    border-radius: 9px;
+    border: 1px solid #e2e8f0;
+    gap: 2px;
+}
+
+.siddhanta-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    font-family: inherit;
+    border: none;
+    border-radius: 7px;
+    background: transparent;
+    color: #64748b;
+    cursor: pointer;
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    white-space: nowrap;
+    user-select: none;
+}
+
+.siddhanta-btn:hover:not(.active) {
+    color: #1e293b;
+    background: rgba(255, 255, 255, 0.7);
+}
+
+.siddhanta-btn.active {
+    background: #ffffff;
+    color: #881337;
+    font-weight: 700;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08), 0 1px 2px rgba(0, 0, 0, 0.04);
+}
+
+#btnSiddhantaSurya.active {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    color: #92400e;
+    box-shadow: 0 0 0 1.5px #f59e0b, 0 2px 5px rgba(245, 158, 11, 0.2);
+}
+
+#btnSiddhantaDrik.active {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    color: #0369a1;
+    box-shadow: 0 0 0 1.5px #0284c7, 0 2px 5px rgba(2, 132, 199, 0.2);
+}
+
+.siddhanta-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: #16a34a; /* green active pulse */
+    box-shadow: 0 0 0 2px rgba(22, 163, 74, 0.2);
+    display: inline-block;
+}
+
+.siddhanta-badge-soon {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1.5px 5.5px;
+    border-radius: 4px;
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #fde68a;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+/* Floating Notification Toast */
+.siddhanta-toast {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+    background: #1e293b;
+    color: #ffffff;
+    padding: 12px 18px;
+    border-radius: 10px;
+    box-shadow: 0 10px 25px -3px rgba(0, 0, 0, 0.25), 0 4px 6px -2px rgba(0, 0, 0, 0.1);
+    font-size: 0.88rem;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    max-width: 420px;
+    animation: toastSlideUp 0.3s ease-out;
+    border-left: 4px solid #b45309;
+}
+
+.siddhanta-toast.warning {
+    border-left-color: #f59e0b;
+    background: #0f172a;
+}
+
+.siddhanta-toast.success {
+    border-left-color: #10b981;
+    background: #064e3b;
+}
+
+.siddhanta-badge-live {
+    font-size: 0.68rem;
+    font-weight: 700;
+    padding: 1.5px 5.5px;
+    border-radius: 4px;
+    background: #ecfdf5;
+    color: #047857;
+    border: 1px solid #a7f3d0;
+    letter-spacing: 0.2px;
+    line-height: 1.2;
+}
+
+@keyframes toastSlideUp {
+    from {
+        opacity: 0;
+        transform: translateY(16px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@media (max-width: 640px) {
+    .siddhanta-switch-container {
+        width: 100%;
+        justify-content: space-between;
+    }
+    .siddhanta-segmented-control {
+        flex: 1;
+        justify-content: center;
+    }
+    .siddhanta-btn {
+        flex: 1;
+        justify-content: center;
+        padding: 6px 8px;
+        font-size: 0.78rem;
+    }
+    .siddhanta-toast {
+        left: 16px;
+        right: 16px;
+        bottom: 16px;
+        max-width: none;
+    }
+}
+
+/* Siddhanta Active Status Banners */
+.siddhanta-active-banner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-radius: 12px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+.siddhanta-active-banner.surya-mode {
+    background: linear-gradient(135deg, #fffbeb 0%, #fef3c7 100%);
+    border: 1.5px solid #f59e0b;
+}
+
+.siddhanta-active-banner.drik-mode {
+    background: linear-gradient(135deg, #f0fdf4 0%, #e0f2fe 100%);
+    border: 1.5px solid #0284c7;
+}
+
+.siddhanta-active-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.siddhanta-active-icon {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+.siddhanta-active-title {
+    margin: 0 0 4px 0;
+    font-size: 1.12rem;
+    font-weight: 800;
+    font-family: var(--font-title);
+}
+
+.siddhanta-active-banner.surya-mode .siddhanta-active-title {
+    color: #92400e;
+}
+
+.siddhanta-active-banner.drik-mode .siddhanta-active-title {
+    color: #0369a1;
+}
+
+.siddhanta-active-desc {
+    margin: 0;
+    font-size: 0.88rem;
+    color: #475569;
+    line-height: 1.4;
+}
+
+.siddhanta-active-badge {
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    white-space: nowrap;
+}
+
+.siddhanta-active-banner.surya-mode .siddhanta-active-badge {
+    background: #d97706;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(217, 119, 6, 0.3);
+}
+
+.siddhanta-active-banner.drik-mode .siddhanta-active-badge {
+    background: #0284c7;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.3);
+}
+
+.badge-siddhanta-pill {
+    font-size: 0.8rem;
+    font-weight: 600;
+    padding: 3px 10px;
+    border-radius: 14px;
+    vertical-align: middle;
+    margin-left: 10px;
+    display: inline-block;
+}
+.badge-siddhanta-pill.surya {
+    background: #fef3c7;
+    color: #b45309;
+    border: 1px solid #f59e0b;
+}
+.badge-siddhanta-pill.drik {
+    background: #e0f2fe;
+    color: #0369a1;
+    border: 1px solid #38bdf8;
+}
+
+
+/* ====================================================
+   मुख्य फुटर (App Footer - वेदश्चक्षु)
+   ==================================================== */
+.app-footer {
+    background: radial-gradient(circle at 15% 30%, rgba(198, 164, 92, 0.08) 0%, transparent 50%),
+                linear-gradient(180deg, #101A33 0%, #0B1224 100%);
+    color: #CBD5E1;
+    border-top: 3.5px solid var(--gold);
+    margin-top: 60px;
+    padding-top: 45px;
+    box-shadow: 0 -8px 24px rgba(16, 26, 51, 0.15);
+    font-family: var(--font-body);
+}
+
+.footer-container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.footer-top-grid {
+    display: grid;
+    grid-template-columns: 1.5fr 1fr 1.2fr 1fr;
+    gap: 36px;
+    padding-bottom: 40px;
+    border-bottom: 1px solid rgba(198, 164, 92, 0.25);
+}
+
+.footer-brand-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 14px;
+}
+
+.footer-logo {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    border-radius: 50%;
+    filter: drop-shadow(0 0 8px rgba(217, 119, 6, 0.45));
+    transition: transform 0.25s ease;
+}
+
+.footer-logo:hover {
+    transform: scale(1.06);
+}
+
+.footer-brand-title {
+    font-family: var(--font-heading);
+    font-size: 1.55rem;
+    font-weight: 800;
+    color: #FFFFFF;
+    letter-spacing: 0.5px;
+    margin: 0;
+    line-height: 1.2;
+}
+
+.footer-brand-subtitle {
+    font-size: 0.78rem;
+    color: var(--gold);
+    font-weight: 600;
+    letter-spacing: 0.2px;
+}
+
+.footer-shloka-box {
+    background: rgba(198, 164, 92, 0.08);
+    border-left: 3px solid var(--gold);
+    padding: 10px 14px;
+    border-radius: 0 8px 8px 0;
+    margin: 14px 0;
+}
+
+.footer-shloka {
+    font-family: var(--font-sanskrit);
+    font-size: 0.86rem;
+    color: #F7E5B5;
+    font-style: italic;
+    line-height: 1.55;
+    margin: 0;
+}
+
+.footer-desc {
+    font-size: 0.84rem;
+    color: #94A3B8;
+    line-height: 1.6;
+    margin-top: 10px;
+}
+
+.footer-desc strong {
+    color: #F1F5F9;
+}
+
+.footer-col-title {
+    font-family: var(--font-heading);
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #FFFFFF;
+    margin-bottom: 18px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    letter-spacing: 0.3px;
+}
+
+.footer-col-title .col-icon {
+    color: var(--gold);
+    font-size: 0.95rem;
+}
+
+.footer-links-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.footer-links-list li a {
+    color: #CBD5E1;
+    text-decoration: none;
+    font-size: 0.88rem;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    transition: all 0.2s ease;
+}
+
+.footer-links-list li a:hover {
+    color: #F59E0B;
+    transform: translateX(4px);
+}
+
+.footer-features-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 0.82rem;
+    color: #94A3B8;
+}
+
+.footer-features-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    line-height: 1.45;
+}
+
+.footer-features-list strong {
+    color: #E2E8F0;
+}
+
+.feature-bullet {
+    color: var(--gold);
+    font-weight: 800;
+    font-size: 0.85rem;
+    line-height: 1.3;
+}
+
+.footer-peace-box {
+    background: rgba(255, 255, 255, 0.04);
+    border: 1px solid rgba(198, 164, 92, 0.2);
+    border-radius: 8px;
+    padding: 14px 16px;
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.peace-mantra {
+    font-family: var(--font-sanskrit);
+    font-size: 0.88rem;
+    color: #FDE68A;
+    line-height: 1.65;
+    margin: 0;
+}
+
+.footer-meta-badges {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.footer-badge {
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: #CBD5E1;
+    font-size: 0.76rem;
+    font-weight: 600;
+    padding: 4px 10px;
+    border-radius: 14px;
+    text-align: center;
+}
+
+/* Footer Bottom Bar */
+.footer-bottom-bar {
+    padding: 22px 0 26px 0;
+}
+
+.footer-bottom-inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    font-size: 0.82rem;
+    color: #94A3B8;
+}
+
+.footer-copyright strong {
+    color: #FFFFFF;
+}
+
+.footer-tagline {
+    font-family: var(--font-sanskrit);
+    color: var(--gold);
+    font-size: 0.86rem;
+    font-weight: 600;
+    letter-spacing: 0.3px;
+}
+
+.footer-made-in {
+    color: #CBD5E1;
+    font-weight: 500;
+}
+
+@media (max-width: 1024px) {
+    .footer-top-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 30px;
+    }
+}
+
+@media (max-width: 640px) {
+    .footer-top-grid {
+        grid-template-columns: 1fr;
+        gap: 26px;
+    }
+    .footer-bottom-inner {
+        flex-direction: column;
+        text-align: center;
+        gap: 8px;
+    }
+}
+
+/* ====================================================
+   मोबाइल तथा साना स्क्रिन रेस्पोन्सिभ सुधारहरू (Responsive UI Enhancements)
+   ==================================================== */
+
+/* १. शीर्ष सिद्धान्त कन्ट्रोल बार (Global Siddhanta Bar) */
+@media (max-width: 768px) {
+    .global-siddhanta-bar {
+        flex-direction: column !important;
+        align-items: stretch !important;
+        padding: 10px 14px !important;
+        gap: 10px !important;
+    }
+    .global-siddhanta-bar > div:first-child {
+        justify-content: center !important;
+        text-align: center !important;
+    }
+    .global-siddhanta-bar .siddhanta-segmented-control {
+        width: 100% !important;
+        justify-content: center !important;
+    }
+    .global-siddhanta-bar .siddhanta-btn {
+        flex: 1 !important;
+        justify-content: center !important;
+        padding: 6px 10px !important;
+        font-size: 0.78rem !important;
+    }
+}
+
+/* २. क्यालेन्डर शीर्ष महिना र वर्ष ड्रपडाउन (Selectable Month & Year Controls) */
+.cal-header-select {
+    appearance: none;
+    -webkit-appearance: none;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='%2378350f'%3e%3cpath fill-rule='evenodd' d='M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z' clip-rule='evenodd'/%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 0.45rem center;
+    background-size: 1em 1em;
+    padding-right: 1.6rem !important;
+    cursor: pointer;
+}
+
+@media (max-width: 640px) {
+    .cal-header-select {
+        font-size: 0.84rem !important;
+        padding-left: 0.5rem !important;
+        padding-right: 1.4rem !important;
+        padding-top: 0.25rem !important;
+        padding-bottom: 0.25rem !important;
+    }
+}
+
+/* ३. आश्विनशुक्ल पक्षः ब्याच (Enlarged Prominent Paksha Badge) */
+#sidebarPakshaBadge {
+    font-size: 0.95rem !important;
+    font-weight: 800 !important;
+    letter-spacing: 0.02em !important;
+    line-height: 1.35;
+}
+
+@media (max-width: 640px) {
+    #sidebarPakshaBadge {
+        font-size: 0.88rem !important;
+        padding: 4px 12px !important;
+    }
+}
+
+/* ४. क्यालेन्डर मुनिका ६ वटा कार्डहरू (No Truncation / Responsive Bottom Strip) */
+.cal-bottom-card {
+    word-break: break-word !important;
+    overflow-wrap: break-word !important;
+    hyphens: auto;
+}
+
+.cal-bottom-card div {
+    white-space: normal !important;
+}
+
+@media (max-width: 640px) {
+    .cal-bottom-card {
+        min-height: 66px !important;
+        padding: 4px 3px !important;
+    }
+    .cal-bottom-card [id^="calBottom"] {
+        font-size: 0.74rem !important;
+        line-height: 1.25 !important;
+    }
+    .cal-bottom-card [id$="Time"] {
+        font-size: 0.68rem !important;
+    }
+}
+
+
+
+
+
+
+
